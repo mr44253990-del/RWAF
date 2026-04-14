@@ -1,5 +1,4 @@
 export type UserRole = 'admin' | 'user';
-export type UserCategory = 'A' | 'B' | 'C' | 'D';
 export type SubscriptionType = 'monthly' | 'yearly';
 
 export interface UserProfile {
@@ -19,7 +18,6 @@ export interface UserProfile {
   mobileNo: string;
   fbId?: string;
   joinDate: string;
-  category: UserCategory;
   email: string;
   role: UserRole;
   status: 'active' | 'blocked';
@@ -27,6 +25,15 @@ export interface UserProfile {
   contributionVisibility: boolean;
   photoURL?: string;
   isProfileComplete: boolean;
+}
+
+export interface ProfileRequest {
+  id: string;
+  userId: string;
+  userName: string;
+  newData: Partial<UserProfile>;
+  status: 'pending' | 'approved' | 'rejected';
+  createdAt: string;
 }
 
 export interface AdminNotice {

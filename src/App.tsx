@@ -6,7 +6,7 @@
 import { useState, useEffect, createContext, useContext } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import { doc, onSnapshot } from 'firebase/firestore';
+import { doc, onSnapshot, collection, query, where, orderBy, limit } from 'firebase/firestore';
 import { auth, db } from './firebase';
 import { UserProfile } from './types';
 
@@ -59,6 +59,39 @@ export default function App() {
       localStorage.setItem('theme', 'light');
     }
   }, [darkMode]);
+
+  useEffect(() => {
+    if ("Notification" in window && Notification.permission === "default") {
+      Notification.requestPermission();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      const q = query(
+        collection(db, 'notices'), 
+        where('active', '==', true), 
+        orderBy('createdAt', 'desc'), 
+        limit(1)
+      );
+      const unsubscribeNotices = onSnapshot(q, (snap) => {
+        if (!snap.empty) {
+          const notice = snap.docs[0].data();
+          const lastNoticeId = localStorage.getItem('lastNoticeId');
+          if (lastNoticeId !== snap.docs[0].id) {
+            if (Notification.permission === "granted") {
+              new Notification("নতুন নোটিশ: " + notice.title, {
+                body: notice.content.substring(0, 100) + "...",
+                icon: "https://cdn-icons-png.flaticon.com/512/3119/3119338.png"
+              });
+            }
+            localStorage.setItem('lastNoticeId', snap.docs[0].id);
+          }
+        }
+      });
+      return () => unsubscribeNotices();
+    }
+  }, [user]);
 
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {

@@ -15,6 +15,12 @@ export default function FundManagement() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [amount, setAmount] = useState('');
   const [method, setMethod] = useState<'bkash' | 'nagad' | 'rocket'>('bkash');
+
+  useEffect(() => {
+    if (profile?.subscriptionAmount) {
+      setAmount(profile.subscriptionAmount.toString());
+    }
+  }, [profile]);
   const [txId, setTxId] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -110,8 +116,8 @@ export default function FundManagement() {
             <p className="font-bold">৳0</p>
           </div>
           <div className="bg-white/10 p-3 rounded-2xl backdrop-blur-sm">
-            <p className="text-blue-100 text-xs mb-1">চাঁদার ক্যাটাগরি</p>
-            <p className="font-bold">{profile?.category}</p>
+            <p className="text-blue-100 text-xs mb-1">সদস্যপদ</p>
+            <p className="font-bold">{profile?.subscriptionType === 'monthly' ? 'মাসিক' : 'বাৎসরিক'}</p>
           </div>
         </div>
       </div>
@@ -189,7 +195,7 @@ export default function FundManagement() {
                       method === 'bkash' ? "border-pink-500 bg-pink-50 dark:bg-pink-900/20" : "border-slate-100 dark:border-slate-700 hover:border-slate-200 dark:hover:border-slate-600"
                     )}
                   >
-                    <Smartphone size={24} className="text-pink-500" />
+                    <img src="https://www.logo.wine/a/logo/BKash/BKash-Logo.wine.svg" alt="bKash" className="w-10 h-10 object-contain" referrerPolicy="no-referrer" />
                     <span className="text-xs font-bold text-slate-700 dark:text-slate-300">বিকাশ</span>
                   </button>
                   <button 
@@ -200,7 +206,7 @@ export default function FundManagement() {
                       method === 'nagad' ? "border-orange-500 bg-orange-50 dark:bg-orange-900/20" : "border-slate-100 dark:border-slate-700 hover:border-slate-200 dark:hover:border-slate-600"
                     )}
                   >
-                    <Smartphone size={24} className="text-orange-500" />
+                    <img src="https://www.logo.wine/a/logo/Nagad/Nagad-Logo.wine.svg" alt="Nagad" className="w-10 h-10 object-contain" referrerPolicy="no-referrer" />
                     <span className="text-xs font-bold text-slate-700 dark:text-slate-300">নগদ</span>
                   </button>
                   <button 
@@ -211,7 +217,7 @@ export default function FundManagement() {
                       method === 'rocket' ? "border-purple-500 bg-purple-50 dark:bg-purple-900/20" : "border-slate-100 dark:border-slate-700 hover:border-slate-200 dark:hover:border-slate-600"
                     )}
                   >
-                    <Smartphone size={24} className="text-purple-500" />
+                    <img src="https://www.logo.wine/a/logo/Dutch_Bangla_Bank/Dutch_Bangla_Bank-Logo.wine.svg" alt="Rocket" className="w-10 h-10 object-contain" referrerPolicy="no-referrer" />
                     <span className="text-xs font-bold text-slate-700 dark:text-slate-300">রকেট</span>
                   </button>
                 </div>

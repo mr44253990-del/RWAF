@@ -13,7 +13,7 @@ import {
   orderBy, where, serverTimestamp
 } from 'firebase/firestore';
 import { db, auth } from '../firebase';
-import { UserProfile, FundTransaction, Poll, AppSettings, UserCategory, SubscriptionType, AdminNotice } from '../types';
+import { UserProfile, FundTransaction, Poll, AppSettings, SubscriptionType, AdminNotice } from '../types';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { format } from 'date-fns';
@@ -55,6 +55,7 @@ export default function AdminPanel() {
           { path: '/admin/polls', icon: Vote, label: 'ভোট' },
           { path: '/admin/notices', icon: Megaphone, label: 'নোটিশ' },
           { path: '/admin/posts', icon: MessageSquare, label: 'পোস্ট' },
+          { path: '/admin/requests', icon: UserCheck, label: 'প্রোফাইল অনুরোধ' },
           { path: '/admin/settings', icon: Settings, label: 'সেটিংস' },
         ].map((item) => {
           const isActive = location.pathname === item.path;
@@ -80,6 +81,7 @@ export default function AdminPanel() {
         <Route path="/expenses" element={<ExpenseManagement />} />
         <Route path="/polls" element={<Voting />} />
         <Route path="/notices" element={<NoticeManagement />} />
+        <Route path="/requests" element={<ProfileRequestManagement />} />
         <Route path="/settings" element={<GlobalSettings />} />
       </Routes>
     </div>
@@ -101,7 +103,6 @@ function UserManagement() {
     email: '',
     password: '',
     mobileNo: '',
-    category: 'A' as UserCategory,
     address: '',
     subscriptionAmount: 100,
     subscriptionType: 'monthly' as SubscriptionType,
@@ -129,7 +130,6 @@ function UserManagement() {
         name: newUser.name,
         email: newUser.email,
         mobileNo: newUser.mobileNo,
-        category: newUser.category,
         address: newUser.address,
         subscriptionAmount: newUser.subscriptionAmount,
         subscriptionType: newUser.subscriptionType,
@@ -405,19 +405,6 @@ function UserManagement() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">ক্যাটাগরি</label>
-                  <select 
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 text-slate-800 dark:text-slate-100"
-                    value={newUser.category || 'A'}
-                    onChange={(e) => setNewUser({...newUser, category: e.target.value as UserCategory})}
-                  >
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                  </select>
-                </div>
-                <div>
                   <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">চাঁদার পরিমান</label>
                   <input 
                     type="number" required
@@ -521,19 +508,6 @@ function UserManagement() {
                     value={selectedUser.mobileNo || ''}
                     onChange={(e) => setSelectedUser({...selectedUser, mobileNo: e.target.value})}
                   />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">ক্যাটাগরি</label>
-                  <select 
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 text-slate-800 dark:text-slate-100"
-                    value={selectedUser.category || 'A'}
-                    onChange={(e) => setSelectedUser({...selectedUser, category: e.target.value as UserCategory})}
-                  >
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                  </select>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">চাঁদার পরিমান</label>
@@ -1046,6 +1020,75 @@ function Voting() {
   );
 }
 
+function ProfileRequestManagement() {
+  const [requests, setRequests] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const q = query(collection(db, 'profile_requests'), where('status', '==', 'pending'));
+    return onSnapshot(q, (snap) => {
+      setRequests(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+      setLoading(false);
+    });
+  }, []);
+
+  const handleAction = async (req: any, action: 'approved' | 'rejected') => {
+    try {
+      if (action === 'approved') {
+        await updateDoc(doc(db, 'users', req.userId), req.newData);
+      }
+      await updateDoc(doc(db, 'profile_requests', req.id), { status: action });
+      alert(`অনুরোধ ${action === 'approved' ? 'অনুমোদিত' : 'প্রত্যাখ্যাত'} হয়েছে।`);
+    } catch (err) {
+      console.error(err);
+      alert('ব্যর্থ হয়েছে।');
+    }
+  };
+
+  if (loading) return <div className="p-8 text-center">লোড হচ্ছে...</div>;
+
+  return (
+    <div className="space-y-6">
+      <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+        <h2 className="font-bold text-slate-800 dark:text-slate-100 mb-4">প্রোফাইল পরিবর্তনের অনুরোধ ({requests.length})</h2>
+        <div className="space-y-4">
+          {requests.length === 0 ? (
+            <p className="text-slate-500 text-center py-8">কোন পেন্ডিং অনুরোধ নেই।</p>
+          ) : (
+            requests.map(req => (
+              <div key={req.id} className="p-4 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-700 flex flex-col md:flex-row justify-between gap-4">
+                <div>
+                  <h4 className="font-bold text-slate-800 dark:text-slate-100">{req.userName}</h4>
+                  <div className="mt-2 text-sm space-y-1 text-slate-600 dark:text-slate-400">
+                    {Object.entries(req.newData).map(([key, value]) => (
+                      <p key={key}><span className="font-bold uppercase">{key}:</span> {value as string}</p>
+                    ))}
+                  </div>
+                  <p className="text-xs text-slate-400 mt-2">{format(new Date(req.createdAt), 'PPpp')}</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button 
+                    onClick={() => handleAction(req, 'approved')}
+                    className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-bold hover:bg-green-700 transition-colors"
+                  >
+                    অনুমোদন
+                  </button>
+                  <button 
+                    onClick={() => handleAction(req, 'rejected')}
+                    className="px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-bold hover:bg-red-700 transition-colors"
+                  >
+                    বাতিল
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function GlobalSettings() {
   const [settings, setSettings] = useState<AppSettings>({
     bkashNo: '',
@@ -1071,33 +1114,42 @@ function GlobalSettings() {
     <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 max-w-xl">
       <h2 className="font-bold text-slate-800 dark:text-slate-100 mb-6">অ্যাপ সেটিংস</h2>
       <form onSubmit={saveSettings} className="space-y-6">
-        <div className="grid grid-cols-1 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">বিকাশ নম্বর</label>
-            <input 
-              type="text" 
-              className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-xl outline-none text-slate-800 dark:text-slate-100"
-              value={settings.bkashNo || ''}
-              onChange={(e) => setSettings({...settings, bkashNo: e.target.value})}
-            />
+        <div className="grid grid-cols-1 gap-6">
+          <div className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-700">
+            <img src="https://www.logo.wine/a/logo/BKash/BKash-Logo.wine.svg" alt="bKash" className="w-12 h-12 object-contain" referrerPolicy="no-referrer" />
+            <div className="flex-1">
+              <label className="block text-xs font-bold text-slate-500 mb-1">বিকাশ নম্বর</label>
+              <input 
+                type="text" 
+                className="w-full bg-transparent font-bold text-slate-800 dark:text-slate-100 outline-none"
+                value={settings.bkashNo || ''}
+                onChange={(e) => setSettings({...settings, bkashNo: e.target.value})}
+              />
+            </div>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">নগদ নম্বর</label>
-            <input 
-              type="text" 
-              className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-xl outline-none text-slate-800 dark:text-slate-100"
-              value={settings.nagadNo || ''}
-              onChange={(e) => setSettings({...settings, nagadNo: e.target.value})}
-            />
+          <div className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-700">
+            <img src="https://www.logo.wine/a/logo/Nagad/Nagad-Logo.wine.svg" alt="Nagad" className="w-12 h-12 object-contain" referrerPolicy="no-referrer" />
+            <div className="flex-1">
+              <label className="block text-xs font-bold text-slate-500 mb-1">নগদ নম্বর</label>
+              <input 
+                type="text" 
+                className="w-full bg-transparent font-bold text-slate-800 dark:text-slate-100 outline-none"
+                value={settings.nagadNo || ''}
+                onChange={(e) => setSettings({...settings, nagadNo: e.target.value})}
+              />
+            </div>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">রকেট নম্বর</label>
-            <input 
-              type="text" 
-              className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-xl outline-none text-slate-800 dark:text-slate-100"
-              value={settings.rocketNo || ''}
-              onChange={(e) => setSettings({...settings, rocketNo: e.target.value})}
-            />
+          <div className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-700">
+            <img src="https://www.logo.wine/a/logo/Dutch_Bangla_Bank/Dutch_Bangla_Bank-Logo.wine.svg" alt="Rocket" className="w-12 h-12 object-contain" referrerPolicy="no-referrer" />
+            <div className="flex-1">
+              <label className="block text-xs font-bold text-slate-500 mb-1">রকেট নম্বর</label>
+              <input 
+                type="text" 
+                className="w-full bg-transparent font-bold text-slate-800 dark:text-slate-100 outline-none"
+                value={settings.rocketNo || ''}
+                onChange={(e) => setSettings({...settings, rocketNo: e.target.value})}
+              />
+            </div>
           </div>
         </div>
 
