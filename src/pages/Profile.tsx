@@ -26,22 +26,21 @@ export default function Profile() {
 
   const handleSubmitRequest = async (e: FormEvent) => {
     e.preventDefault();
-    if (!user) return;
+    if (!user || !profile) return;
     setLoading(true);
     try {
-      await addDoc(collection(db, 'messages'), {
+      await addDoc(collection(db, 'profile_requests'), {
         userId: user.uid,
         userName: profile.name,
-        message: `প্রোফাইল পরিবর্তনের অনুরোধ: \nনাম: ${editData.name}\nঠিকানা: ${editData.address}\nজন্ম তারিখ: ${editData.dob}`,
-        type: 'profile_update',
-        data: editData,
-        status: 'open',
+        newData: editData,
+        status: 'pending',
         createdAt: new Date().toISOString()
       });
-      alert('আপনার অনুরোধ অ্যাডমিনের কাছে পাঠানো হয়েছে। অনুমোদিত হলে প্রোফাইল আপডেট হবে।');
+      alert('আপনার প্রোফাইল পরিবর্তনের অনুরোধ অ্যাডমিনের কাছে পাঠানো হয়েছে। অনুমোদিত হলে প্রোফাইল আপডেট হবে।');
       setIsEditing(false);
     } catch (err) {
       console.error(err);
+      alert('অনুরোধ পাঠাতে ব্যর্থ হয়েছে।');
     } finally {
       setLoading(false);
     }

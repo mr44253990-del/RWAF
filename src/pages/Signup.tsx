@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, setDoc, serverTimestamp, getDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
-import { UserCategory, SubscriptionType } from '../types';
+import { SubscriptionType } from '../types';
 import { Volume2, VolumeX, UserPlus, Info, CheckCircle, ShieldCheck, Heart, Users, BookOpen, Scale, Award, Flag } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -27,7 +27,6 @@ export default function Signup() {
     subscriptionType: 'monthly' as SubscriptionType,
     mobileNo: '',
     fbId: '',
-    category: 'A' as UserCategory,
     email: '',
     password: '',
     confirmPassword: '',
@@ -69,13 +68,12 @@ export default function Signup() {
       address: 'আপনার বর্তমান ঠিকানা লিখুন।',
       bloodGroup: 'আপনার রক্তের গ্রুপ নির্বাচন করুন।',
       maritalStatus: 'আপনার বৈবাহিক অবস্থা নির্বাচন করুন।',
-      nid: 'আপনার জাতীয় পরিচয় পত্র নম্বর দিন।',
+      nid: 'আপনার জাতীয় পরিচয় পত্র নম্বর দিন (ঐচ্ছিক)।',
       subscriptionAmount: 'আপনার মাসিক বা বাৎসরিক চাঁদার পরিমান লিখুন।',
       subscriptionType: 'চাঁদার ধরণ নির্বাচন করুন।',
       mobileNo: 'আপনার সচল মোবাইল নম্বরটি দিন।',
       fbId: 'আপনার ফেসবুক আইডি লিংক বা নাম দিন (ঐচ্ছিক)।',
       joinDate: 'সংগঠনে সদস্য হওয়ার তারিখ দিন।',
-      category: 'আপনার সদস্য ক্যাটাগরি নির্বাচন করুন।',
       email: 'আপনার ইমেইল এড্রেসটি দিন যা লগইন করতে ব্যবহার করবেন।',
       password: 'কমপক্ষে ছয় অক্ষরের একটি শক্তিশালী পাসওয়ার্ড দিন।',
       confirmPassword: 'পাসওয়ার্ডটি পুনরায় টাইপ করুন।',
@@ -249,8 +247,7 @@ export default function Signup() {
                   <input
                     type="text"
                     required
-                    disabled={isCompletingProfile}
-                    className="w-full px-5 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-950 outline-none transition-all text-slate-800 dark:text-slate-100 disabled:opacity-50"
+                    className="w-full px-5 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-950 outline-none transition-all text-slate-800 dark:text-slate-100"
                     value={formData.name || ''}
                     onFocus={() => handleFocus('name')}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
@@ -350,10 +347,9 @@ export default function Signup() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">জাতীয় পরিচয় পত্র নং *</label>
+                  <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">জাতীয় পরিচয় পত্র নং (ঐচ্ছিক)</label>
                   <input
                     type="text"
-                    required
                     className="w-full px-5 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-950 outline-none transition-all text-slate-800 dark:text-slate-100"
                     value={formData.nid || ''}
                     onFocus={() => handleFocus('nid')}
@@ -402,21 +398,6 @@ export default function Signup() {
                   >
                     <option value="monthly">মাসিক</option>
                     <option value="yearly">বাৎসরিক</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">ক্যাটাগরি *</label>
-                  <select
-                    className="w-full px-5 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-950 outline-none transition-all text-slate-800 dark:text-slate-100"
-                    value={formData.category || 'A'}
-                    onFocus={() => handleFocus('category')}
-                    onChange={(e) => setFormData({...formData, category: e.target.value as UserCategory})}
-                  >
-                    <option value="A">ক্যাটাগরি A</option>
-                    <option value="B">ক্যাটাগরি B</option>
-                    <option value="C">ক্যাটাগরি C</option>
-                    <option value="D">ক্যাটাগরি D</option>
                   </select>
                 </div>
 
