@@ -1,0 +1,58 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores detailed information about foundation members.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "user"] },
+        "status": { "type": "string", "enum": ["active", "blocked"] },
+        "category": { "type": "string", "enum": ["A", "B", "C", "D"] },
+        "totalContribution": { "type": "number" },
+        "contributionVisibility": { "type": "boolean" }
+      },
+      "required": ["uid", "name", "email", "role", "status"]
+    },
+    "FundTransaction": {
+      "title": "Fund Transaction",
+      "description": "Records of income and expenses.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "amount": { "type": "number" },
+        "type": { "type": "string", "enum": ["income", "expense"] },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] }
+      },
+      "required": ["userId", "amount", "type", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "UserProfile",
+      "description": "Collection of foundation members."
+    },
+    "/transactions/{id}": {
+      "schema": "FundTransaction",
+      "description": "Collection of all financial transactions."
+    },
+    "/polls/{id}": {
+      "schema": "object",
+      "description": "Voting polls created by admin."
+    },
+    "/posts/{id}": {
+      "schema": "object",
+      "description": "Facebook-style posts by admin."
+    },
+    "/messages/{id}": {
+      "schema": "object",
+      "description": "Messages between users and admin."
+    },
+    "/settings/main": {
+      "schema": "object",
+      "description": "Global app settings like payment numbers."
+    }
+  }
+}
