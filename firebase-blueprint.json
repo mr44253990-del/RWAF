@@ -53,6 +53,10 @@
     "/settings/main": {
       "schema": "object",
       "description": "Global app settings like payment numbers."
+    },
+    "/chats/{uid}": {
+      "schema": "object",
+      "description": "AI Assistant chat history for each user."
     }
   }
 }
