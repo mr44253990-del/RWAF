@@ -6,6 +6,10 @@ import fs from 'fs';
 
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
+  
+  // Populate process.env for local API handlers
+  Object.assign(process.env, env);
+
   return {
     plugins: [
       react(), 
