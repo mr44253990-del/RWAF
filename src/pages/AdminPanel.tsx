@@ -731,8 +731,8 @@ function FundApproval() {
                 </p>
               </div>
               <div className="text-right">
-                <p className="text-4xl font-black text-gradient drop-shadow-[0_0_15px_rgba(99,102,241,0.3)]">৳{t.amount?.toLocaleString()}</p>
-                <p className="text-xs font-black text-slate-500 uppercase mt-3 bg-white/5 px-3 py-1 rounded-lg border border-white/10">{t.paymentMethod} • {t.transactionId}</p>
+                <p className="text-2xl md:text-4xl font-black text-gradient drop-shadow-[0_0_15px_rgba(99,102,241,0.3)]">৳{t.amount?.toLocaleString()}</p>
+                <p className="text-xs font-black text-slate-500 uppercase mt-3 bg-white/5 px-3 py-1 rounded-lg border border-white/10">{t.paymentMethod || t.method} • {t.transactionId || t.txId}</p>
               </div>
             </div>
             <div className="flex gap-6 relative z-10">
