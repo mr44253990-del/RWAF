@@ -3,7 +3,7 @@ import { collection, query, orderBy, limit, onSnapshot, doc, where } from 'fireb
 import { db } from '../firebase';
 import { useAuth } from '../App';
 import { AppSettings, FundTransaction, UserProfile, AdminNotice } from '../types';
-import { Wallet, TrendingUp, TrendingDown, Users, Bell, ChevronRight, BarChart3, PieChart as PieChartIcon, Megaphone, Plus, Shield, History as HistoryIcon } from 'lucide-react';
+import { Wallet, TrendingUp, TrendingDown, Users, Bell, ChevronRight, BarChart3, PieChart as PieChartIcon, Megaphone, Plus, Shield, History as HistoryIcon, X, Info, AlertTriangle, AlertOctagon } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { format, subMonths, startOfMonth, endOfMonth } from 'date-fns';
 import {
@@ -44,6 +44,15 @@ export default function Dashboard() {
   const [notices, setNotices] = useState<AdminNotice[]>([]);
   const [chartData, setChartData] = useState<any>(null);
   const [pieData, setPieData] = useState<any>(null);
+  const [selectedNotice, setSelectedNotice] = useState<AdminNotice | null>(null);
+  const [hasNewNotices, setHasNewNotices] = useState(false);
+
+  useEffect(() => {
+    // Request notification permission
+    if ('Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission();
+    }
+  }, []);
 
   useEffect(() => {
     const unsubSettings = onSnapshot(doc(db, 'settings', 'main'), (docSnap) => {
@@ -67,7 +76,32 @@ export default function Dashboard() {
     const qNotices = query(collection(db, 'notices'), where('active', '==', true));
     const unsubNotices = onSnapshot(qNotices, (snap) => {
       const data = snap.docs.map(d => ({ id: d.id, ...d.data() } as AdminNotice));
-      setNotices(data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 3));
+      const sorted = data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      
+      // Check for unread/new notices (compare with local storage or just last seen time)
+      const lastSeenStr = localStorage.getItem('last_notice_seen');
+      const lastSeen = lastSeenStr ? new Date(lastSeenStr).getTime() : 0;
+      const latestNoticeTime = sorted.length > 0 ? new Date(sorted[0].createdAt).getTime() : 0;
+
+      if (latestNoticeTime > lastSeen) {
+        setHasNewNotices(true);
+        
+        // Push browser notification if it's the first time we see this specific new notice
+        const lastNotifiedId = localStorage.getItem('last_notified_id');
+        if (sorted.length > 0 && sorted[0].id !== lastNotifiedId) {
+          if ('Notification' in window && Notification.permission === 'granted') {
+            new Notification("নতুন নোটিশ: " + sorted[0].title, {
+              body: sorted[0].content.substring(0, 100) + "...",
+              icon: '/favicon.ico'
+            });
+            localStorage.setItem('last_notified_id', sorted[0].id);
+          }
+        }
+      } else {
+        setHasNewNotices(false);
+      }
+
+      setNotices(sorted.slice(0, 3));
     });
 
     // Process Chart Data
@@ -169,6 +203,83 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-8 md:space-y-12 pb-20">
+      {/* Notice Detail Modal */}
+      <AnimatePresence>
+        {selectedNotice && (
+          <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-xl flex items-center justify-center p-6 z-[100]">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 50 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 50 }}
+              className="glass-card w-full max-w-2xl overflow-hidden border border-white/10 shadow-[0_50px_100px_rgba(0,0,0,0.5)] relative"
+            >
+               <div className={cn(
+                "absolute inset-0 opacity-10 blur-[100px] pointer-events-none",
+                selectedNotice.type === 'urgent' ? "bg-rose-500" : selectedNotice.type === 'warning' ? "bg-amber-500" : "bg-indigo-500"
+              )} />
+              
+              <div className="p-8 md:p-12 border-b border-white/5 flex justify-between items-center bg-white/5 relative z-10">
+                <div className="flex items-center gap-6">
+                  <div className={cn(
+                    "p-4 rounded-2xl border",
+                    selectedNotice.type === 'urgent' ? "bg-rose-500/10 text-rose-400 border-rose-500/20" : 
+                    selectedNotice.type === 'warning' ? "bg-amber-500/10 text-amber-400 border-amber-500/20" : "bg-indigo-500/10 text-indigo-400 border-indigo-500/20"
+                  )}>
+                    {selectedNotice.type === 'urgent' ? <AlertOctagon size={28} /> : 
+                     selectedNotice.type === 'warning' ? <AlertTriangle size={28} /> : <Info size={28} />}
+                  </div>
+                  <div>
+                    <h2 className="text-xl md:text-3xl font-black text-white uppercase tracking-tight">{selectedNotice.title}</h2>
+                    <p className="text-[10px] md:text-xs font-black text-slate-500 uppercase mt-2 opacity-60">প্রকাশিত: {format(new Date(selectedNotice.createdAt), 'dd MMMM yyyy, hh:mm a')}</p>
+                  </div>
+                </div>
+                <motion.button 
+                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => setSelectedNotice(null)}
+                  className="p-3 bg-white/5 text-slate-400 hover:text-white rounded-xl transition-colors border border-white/5"
+                >
+                  <X size={24} />
+                </motion.button>
+              </div>
+
+              <div className="p-8 md:p-12 space-y-8 relative z-10 max-h-[60vh] overflow-y-auto custom-scrollbar">
+                <div className="prose prose-invert max-w-none">
+                  <p className="text-slate-300 text-lg md:text-xl font-medium leading-relaxed whitespace-pre-wrap">{selectedNotice.content}</p>
+                </div>
+                
+                <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row gap-6">
+                  <div className="flex-1 p-5 glass rounded-2xl border border-white/5">
+                    <p className="text-[10px] font-black text-slate-500 uppercase mb-2">নোটিশ ধরণ</p>
+                    <p className={cn(
+                      "font-black uppercase text-sm",
+                      selectedNotice.type === 'urgent' ? "text-rose-400" : selectedNotice.type === 'warning' ? "text-amber-400" : "text-indigo-400"
+                    )}>
+                      {selectedNotice.type === 'urgent' ? 'অতি জরুরি' : selectedNotice.type === 'warning' ? 'সতর্কতা' : 'সাধারণ তথ্য'}
+                    </p>
+                  </div>
+                  <div className="flex-1 p-5 glass rounded-2xl border border-white/5">
+                    <p className="text-[10px] font-black text-slate-500 uppercase mb-2">প্রকাশক</p>
+                    <p className="text-white font-black uppercase text-sm">অ্যাডমিন প্যানেল</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-8 md:p-10 bg-white/5 border-t border-white/5 flex justify-end relative z-10">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setSelectedNotice(null)}
+                  className="px-10 py-4 bg-indigo-600 text-white rounded-xl font-black uppercase text-xs shadow-lg shadow-indigo-600/20"
+                >
+                  ঠিক আছে
+                </motion.button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative z-10">
         <div className="relative group w-full md:w-auto">
           <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -188,12 +299,25 @@ export default function Dashboard() {
           <motion.button 
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="p-4 md:p-6 glass rounded-[2rem] md:rounded-[2.5rem] text-slate-400 hover:text-indigo-400 transition-all border border-white/5 hover:border-indigo-500/30 shadow-xl relative overflow-hidden group/btn"
+            onClick={() => {
+              if (notices.length > 0) {
+                localStorage.setItem('last_notice_seen', new Date().toISOString());
+                setHasNewNotices(false);
+                setSelectedNotice(notices[0]);
+              }
+            }}
+            className={cn(
+              "p-4 md:p-6 glass rounded-[2rem] md:rounded-[2.5rem] transition-all border shadow-xl relative overflow-hidden group/btn",
+              hasNewNotices ? "text-rose-400 border-rose-500/30" : "text-slate-400 border-white/5 hover:text-indigo-400 hover:border-indigo-500/30"
+            )}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity" />
-            <Bell size={24} className="md:w-8 md:h-8 relative z-10" />
+            <div className={cn(
+              "absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity",
+              hasNewNotices ? "bg-gradient-to-br from-rose-500/10 to-transparent" : "bg-gradient-to-br from-indigo-500/10 to-transparent"
+            )} />
+            <Bell size={24} className={cn("md:w-8 md:h-8 relative z-10", hasNewNotices && "animate-bounce")} />
           </motion.button>
-          {notices.some(n => n.type === 'urgent') && (
+          {(hasNewNotices || notices.some(n => n.type === 'urgent')) && (
             <span className="absolute -top-1 -right-1 w-4 h-4 md:w-6 md:h-6 bg-rose-500 border-2 md:border-4 border-slate-950 rounded-full animate-pulse shadow-[0_0_20px_rgba(244,63,94,0.8)] z-20" />
           )}
         </div>
@@ -214,8 +338,13 @@ export default function Dashboard() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
                 whileHover={{ y: -5, scale: 1.02 }}
+                onClick={() => {
+                  setSelectedNotice(notice);
+                  localStorage.setItem('last_notice_seen', new Date().toISOString());
+                  setHasNewNotices(false);
+                }}
                 className={cn(
-                  "p-5 md:p-8 rounded-[2rem] md:rounded-[3rem] border flex items-start gap-4 md:gap-6 shadow-xl backdrop-blur-3xl relative overflow-hidden group",
+                  "p-5 md:p-8 rounded-[2rem] md:rounded-[3rem] border flex items-start gap-4 md:gap-6 shadow-xl backdrop-blur-3xl relative overflow-hidden group cursor-pointer",
                   notice.type === 'urgent' ? "bg-rose-500/5 border-rose-500/20" : 
                   notice.type === 'warning' ? "bg-amber-500/5 border-amber-500/20" : "bg-indigo-500/5 border-indigo-500/20"
                 )}

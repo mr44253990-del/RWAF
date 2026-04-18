@@ -1,16 +1,37 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Home, Wallet, Vote, MessageSquare, User, Shield, LogOut, Sun, Moon, History as HistoryIcon, Menu, X } from 'lucide-react';
-import { auth } from '../firebase';
+import { Home, Wallet, Vote, MessageSquare, User, Shield, LogOut, Sun, Moon, History as HistoryIcon, Menu, X, Bell } from 'lucide-react';
+import { auth, db } from '../firebase';
+import { collection, query, where, onSnapshot, orderBy, limit } from 'firebase/firestore';
 import { useAuth } from '../App';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { profile } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [hasUnreadNotices, setHasUnreadNotices] = useState(false);
+
+  useEffect(() => {
+    const q = query(collection(db, 'notices'), where('active', '==', true), orderBy('createdAt', 'desc'), limit(1));
+    const unsubscribe = onSnapshot(q, (snap) => {
+      if (!snap.empty) {
+        const lastSeenStr = localStorage.getItem('last_notice_seen');
+        const lastSeen = lastSeenStr ? new Date(lastSeenStr).getTime() : 0;
+        const latestNoticeTime = new Date(snap.docs[0].data().createdAt).getTime();
+        
+        if (latestNoticeTime > lastSeen) {
+          setHasUnreadNotices(true);
+        } else {
+          setHasUnreadNotices(false);
+        }
+      }
+    });
+
+    return () => unsubscribe();
+  }, [location.pathname]); // Re-check on nav to catch storage updates
 
   const handleLogout = async () => {
     await auth.signOut();
@@ -73,6 +94,9 @@ export default function Navbar() {
                 )}
                 <item.icon size={16} className={cn("relative z-10 transition-transform group-hover:scale-110 group-hover:rotate-12", active && "text-indigo-400")} />
                 <span className="relative z-10">{item.label}</span>
+                {item.path === '/' && hasUnreadNotices && (
+                  <span className="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(244,63,94,0.8)] z-20" />
+                )}
               </Link>
             );
           })}
@@ -113,6 +137,9 @@ export default function Navbar() {
               )}
               <item.icon size={20} className={cn("group-active:scale-90 transition-transform", active && "drop-shadow-[0_0_8px_rgba(99,102,241,0.5)]")} />
               <span className="text-[10px] font-black uppercase text-center leading-none">{item.label}</span>
+              {item.path === '/' && hasUnreadNotices && (
+                <span className="absolute top-1 right-4 w-2 h-2 bg-rose-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(244,63,94,0.8)] z-20" />
+              )}
             </Link>
           );
         })}
@@ -122,8 +149,11 @@ export default function Navbar() {
           onClick={() => setIsMobileMenuOpen(true)}
           className="flex flex-col items-center gap-1 p-2 text-slate-500 group min-w-[60px]"
         >
-          <div className="p-1.5 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
+          <div className="p-1.5 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors relative">
             <Menu size={20} />
+            {hasUnreadNotices && (
+              <span className="absolute -top-1 -right-1 w-2 h-2 bg-rose-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(244,63,94,0.8)]" />
+            )}
           </div>
           <span className="text-[10px] font-black uppercase text-center leading-none">মেনু</span>
         </motion.button>
