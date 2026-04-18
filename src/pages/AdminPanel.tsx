@@ -40,7 +40,7 @@ export default function AdminPanel() {
 
   return (
     <div className="space-y-8 pb-20">
-      <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative z-10">
+      <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-6 relative z-10">
         <div className="relative group">
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
@@ -259,7 +259,7 @@ function UserManagement() {
       animate={{ opacity: 1 }}
       className="space-y-10"
     >
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 glass p-8 rounded-3xl border border-white/5 relative overflow-hidden group">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-6 glass p-6 md:p-8 rounded-[2rem] md:rounded-3xl border border-white/5 relative overflow-hidden group">
         <div className="flex items-center gap-6 relative z-10">
           <div className="p-4 bg-indigo-500/10 rounded-2xl text-indigo-400 border border-indigo-500/20 group-hover:scale-105 transition-all">
             <Users size={32} />
@@ -290,13 +290,13 @@ function UserManagement() {
       </div>
         <div className="overflow-x-auto no-scrollbar">
           <table className="w-full text-left">
-            <thead className="bg-white/5 text-slate-500 text-xs uppercase font-bold text-left">
+            <thead className="bg-white/5 text-slate-500 text-[10px] md:text-xs uppercase font-bold text-left">
               <tr>
-                <th className="px-6 py-8">নাম ও তথ্য</th>
-                <th className="px-6 py-8">ক্যাটাগরি</th>
-                <th className="px-6 py-8">মোট জমা</th>
-                <th className="px-6 py-8">স্ট্যাটাস</th>
-                <th className="px-6 py-8 text-right">অ্যাকশন</th>
+                <th className="px-4 py-6 md:px-6 md:py-8">নাম ও তথ্য</th>
+                <th className="px-4 py-6 md:px-6 md:py-8">ক্যাটাগরি</th>
+                <th className="px-4 py-6 md:px-6 md:py-8">মোট জমা</th>
+                <th className="px-4 py-6 md:px-6 md:py-8">স্ট্যাটাস</th>
+                <th className="px-4 py-6 md:px-6 md:py-8 text-right">অ্যাকশন</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
@@ -306,13 +306,13 @@ function UserManagement() {
                   key={u.uid} 
                   className="hover:bg-white/5 transition-colors group"
                 >
-                  <td className="px-6 py-8">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center font-bold text-indigo-400 border border-indigo-500/20 group-hover:bg-indigo-500 group-hover:text-white transition-all shadow-lg">
+                  <td className="px-4 py-6 md:px-6 md:py-8">
+                    <div className="flex items-center gap-3 md:gap-4">
+                      <div className="w-10 h-10 md:w-12 md:h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center font-bold text-indigo-400 border border-indigo-500/20 group-hover:bg-indigo-500 group-hover:text-white transition-all shadow-lg">
                         {u.name[0]}
                       </div>
                       <div>
-                        <p className="text-lg font-bold text-white tracking-tight group-hover:text-indigo-400 transition-colors">
+                        <p className="text-sm md:text-lg font-bold text-white tracking-tight group-hover:text-indigo-400 transition-colors">
                           {u.name} 
                           {u.role === 'admin' && (
                             <span className="text-xs px-2 py-0.5 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20 uppercase ml-2">Admin</span>
@@ -322,17 +322,17 @@ function UserManagement() {
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-8">
-                    <span className="px-3 py-1 bg-indigo-500/10 text-indigo-400 rounded-xl text-xs font-bold uppercase border border-indigo-500/20">
+                  <td className="px-4 py-6 md:px-6 md:py-8">
+                    <span className="px-2 py-0.5 md:px-3 md:py-1 bg-indigo-500/10 text-indigo-400 rounded-lg md:rounded-xl text-[10px] md:text-xs font-bold uppercase border border-indigo-500/20">
                       {u.category}
                     </span>
                   </td>
-                  <td className="px-6 py-8">
-                    <p className="text-xl font-black text-white">৳{u.totalContribution?.toLocaleString()}</p>
+                  <td className="px-4 py-6 md:px-6 md:py-8">
+                    <p className="text-lg md:text-xl font-black text-white">৳{u.totalContribution?.toLocaleString()}</p>
                   </td>
-                  <td className="px-6 py-8">
+                  <td className="px-4 py-6 md:px-6 md:py-8">
                     <span className={cn(
-                      "px-3 py-1 rounded-xl text-xs font-bold uppercase border",
+                      "px-2 py-0.5 md:px-3 md:py-1 rounded-lg md:rounded-xl text-[10px] md:text-xs font-bold uppercase border",
                       u.status === 'active' ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : "bg-rose-500/10 text-rose-400 border-rose-500/20"
                     )}>
                       {u.status === 'active' ? 'Active' : 'Blocked'}
@@ -700,7 +700,7 @@ function FundApproval() {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-12"
     >
-      <div className="flex items-center gap-8 bg-white/5 p-10 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group">
+      <div className="flex items-center gap-4 md:gap-8 bg-white/5 p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group">
         <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
         <div className="p-5 bg-amber-500/10 rounded-[2rem] text-amber-400 border border-amber-500/20 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-all relative z-10">
           <CreditCard size={40} />
@@ -711,7 +711,7 @@ function FundApproval() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
         {pending.map((t, idx) => (
           <motion.div 
             layout
@@ -719,7 +719,7 @@ function FundApproval() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: idx * 0.05 }}
-            className="glass-card p-12 relative overflow-hidden group border border-white/5 shadow-[0_30px_60px_rgba(0,0,0,0.3)] perspective-1000"
+            className="glass-card p-6 md:p-12 relative overflow-hidden group border border-white/5 shadow-[0_30px_60px_rgba(0,0,0,0.3)] perspective-1000"
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-indigo-500/10 blur-[80px] -mr-24 -mt-24 transition-all group-hover:bg-indigo-500/20" />
             <div className="flex justify-between items-start mb-10 relative z-10">
@@ -756,7 +756,7 @@ function FundApproval() {
           </motion.div>
         ))}
         {pending.length === 0 && (
-          <div className="md:col-span-2 glass-card p-32 border border-dashed border-white/10 text-center flex flex-col items-center justify-center gap-8">
+          <div className="md:col-span-2 glass-card p-12 md:p-32 border border-dashed border-white/10 text-center flex flex-col items-center justify-center gap-6 md:gap-8">
             <div className="p-10 bg-white/5 rounded-[3rem] border border-white/5">
               <Check size={64} className="text-slate-700" />
             </div>
@@ -865,7 +865,7 @@ function ExpenseManagement() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: idx * 0.05 }}
-            className="glass-card p-12 relative overflow-hidden group border border-white/5 shadow-[0_30px_60px_rgba(0,0,0,0.3)] perspective-1000"
+            className="glass-card p-6 md:p-12 relative overflow-hidden group border border-white/5 shadow-[0_30px_60px_rgba(0,0,0,0.3)] perspective-1000"
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-rose-500/10 blur-[80px] -mr-24 -mt-24 transition-all group-hover:bg-rose-500/20" />
             <div className="flex justify-between items-start mb-10 relative z-10">
@@ -1117,7 +1117,7 @@ function NoticeManagement() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: idx * 0.05 }}
             className={cn(
-              "glass-card p-12 relative overflow-hidden group border border-white/5 transition-all hover:bg-white/5",
+              "glass-card p-6 md:p-12 relative overflow-hidden group border border-white/5 transition-all hover:bg-white/5",
               !n.active && "opacity-40 grayscale blur-[1px]"
             )}
           >
@@ -1298,7 +1298,7 @@ function Voting() {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-12"
     >
-      <div className="glass-card p-12 border border-white/5 relative overflow-hidden group shadow-[0_40px_80px_rgba(0,0,0,0.3)]">
+      <div className="glass-card p-6 md:p-12 border border-white/5 relative overflow-hidden group shadow-[0_40px_80px_rgba(0,0,0,0.3)]">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent pointer-events-none" />
         <div className="flex items-center gap-8 mb-10 relative z-10">
           <div className="p-5 bg-indigo-500/10 rounded-[2rem] text-indigo-400 border border-indigo-500/20 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-all">
@@ -1449,7 +1449,7 @@ function ProfileRequestManagement() {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: idx * 0.05 }}
-              className="glass-card p-12 relative overflow-hidden group border border-white/5 shadow-[0_30px_60px_rgba(0,0,0,0.3)] flex flex-col lg:flex-row justify-between gap-12"
+              className="glass-card p-6 md:p-12 relative overflow-hidden group border border-white/5 shadow-[0_30px_60px_rgba(0,0,0,0.3)] flex flex-col lg:flex-row justify-between gap-6 md:gap-12"
             >
               <div className="absolute left-0 top-0 w-2 h-full bg-indigo-500 scale-y-0 group-hover:scale-y-100 transition-transform origin-top" />
               <div className="flex-1">
@@ -1539,7 +1539,7 @@ function PushNotificationPanel() {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-12"
     >
-      <div className="flex items-center gap-8 bg-white/5 p-10 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group">
+      <div className="flex items-center gap-4 md:gap-8 bg-white/5 p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
         <div className="p-5 bg-blue-500/10 rounded-[2rem] text-blue-400 border border-blue-500/20 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-all relative z-10">
           <Bell size={40} />
@@ -1550,11 +1550,11 @@ function PushNotificationPanel() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12">
         <motion.div 
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
-          className="glass-card p-12 border border-white/5 relative overflow-hidden group"
+          className="glass-card p-6 md:p-12 border border-white/5 relative overflow-hidden group"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 blur-[100px] -mr-32 -mt-32 transition-all group-hover:bg-blue-500/10" />
           
@@ -1672,7 +1672,7 @@ function GlobalSettings() {
       </div>
 
       <form onSubmit={saveSettings} className="space-y-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12">
           <div className="space-y-8">
             <h3 className="text-xl font-black text-white uppercase flex items-center gap-4 transition-all">
               <CreditCard className="text-indigo-400" /> পেমেন্ট নম্বরসমূহ

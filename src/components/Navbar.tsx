@@ -6,7 +6,7 @@ import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
 import { useState } from 'react';
 
-export default function Navbar({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: (v: boolean) => void }) {
+export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { profile } = useAuth();
@@ -79,17 +79,6 @@ export default function Navbar({ darkMode, setDarkMode }: { darkMode: boolean, s
         </div>
 
         <div className="ml-auto flex items-center gap-4 relative z-10">
-          <motion.button 
-            whileHover={{ scale: 1.1, rotate: 15 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={() => setDarkMode(!darkMode)}
-            className="p-3 glass text-slate-300 rounded-2xl hover:text-white transition-all border border-white/5 hover:border-indigo-500/30 shadow-xl"
-          >
-            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-          </motion.button>
-          
-          <div className="h-8 w-[1px] bg-white/10 mx-1" />
-
           <motion.button
             whileHover={{ scale: 1.05, x: 5 }}
             whileTap={{ scale: 0.95 }}
@@ -103,27 +92,27 @@ export default function Navbar({ darkMode, setDarkMode }: { darkMode: boolean, s
       </nav>
 
       {/* Mobile Bottom Navbar */}
-      <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] glass h-20 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-50 flex md:hidden items-center justify-around px-4 border-white/10 overflow-hidden">
+      <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] glass h-20 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-50 flex md:hidden items-center justify-around px-2 border-white/10 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-indigo-500/5 to-transparent pointer-events-none" />
-        {navItems.slice(0, 4).map((item) => {
+        {navItems.filter(item => ['/', '/fund', '/voting', '/posts'].includes(item.path)).map((item) => {
           const active = isActive(item.path);
           return (
             <Link
               key={item.path}
               to={item.path}
               className={cn(
-                "relative flex flex-col items-center gap-1.5 p-3 transition-all group",
+                "relative flex flex-col items-center gap-1 p-2 transition-all group min-w-[60px]",
                 active ? "text-indigo-400" : "text-slate-500"
               )}
             >
               {active && (
                 <motion.div
                   layoutId="nav-active-mobile"
-                  className="absolute -top-2 w-10 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full shadow-[0_0_20px_rgba(99,102,241,0.8)]"
+                  className="absolute -top-4 w-10 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full shadow-[0_0_20px_rgba(99,102,241,0.8)]"
                 />
               )}
-              <item.icon size={22} className={cn("group-active:scale-90 transition-transform", active && "drop-shadow-[0_0_8px_rgba(99,102,241,0.5)]")} />
-              <span className="text-[11px] font-black uppercase">{item.label}</span>
+              <item.icon size={20} className={cn("group-active:scale-90 transition-transform", active && "drop-shadow-[0_0_8px_rgba(99,102,241,0.5)]")} />
+              <span className="text-[10px] font-black uppercase text-center leading-none">{item.label}</span>
             </Link>
           );
         })}
@@ -131,12 +120,12 @@ export default function Navbar({ darkMode, setDarkMode }: { darkMode: boolean, s
         <motion.button
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsMobileMenuOpen(true)}
-          className="flex flex-col items-center gap-1.5 p-3 text-slate-500 group"
+          className="flex flex-col items-center gap-1 p-2 text-slate-500 group min-w-[60px]"
         >
-          <div className="p-2 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
-            <Menu size={22} />
+          <div className="p-1.5 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
+            <Menu size={20} />
           </div>
-          <span className="text-[11px] font-black uppercase">মেনু</span>
+          <span className="text-[10px] font-black uppercase text-center leading-none">মেনু</span>
         </motion.button>
       </nav>
 
@@ -155,83 +144,58 @@ export default function Navbar({ darkMode, setDarkMode }: { darkMode: boolean, s
               animate={{ y: 0, scale: 1 }}
               exit={{ y: "100%", scale: 0.95 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="glass-card w-full rounded-[3rem] p-8 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-white/10 relative overflow-hidden"
+              className="glass-card w-full rounded-[3rem] p-6 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-white/10 relative overflow-hidden"
               onClick={e => e.stopPropagation()}
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 blur-[80px] -mr-32 -mt-32" />
               
-              <div className="flex justify-between items-center mb-10 relative z-10">
+              <div className="flex justify-between items-center mb-8 relative z-10">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-500/20">
-                    <Shield size={32} />
+                  <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-500/20">
+                    <Shield size={28} />
                   </div>
                   <div>
-                    <h3 className="font-black text-white text-xl uppercase">মেনু অপশন</h3>
-                    <p className="text-xs text-slate-500 font-black uppercase mt-1">আপনার প্রয়োজনীয় অপশন বেছে নিন</p>
+                    <h3 className="font-black text-white text-lg uppercase leading-tight">মেনু অপশন</h3>
+                    <p className="text-[10px] text-slate-500 font-black uppercase mt-0.5">আপনার প্রয়োজনীয় অপশন বেছে নিন</p>
                   </div>
                 </div>
                 <motion.button 
                   whileHover={{ rotate: 90 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-3 glass rounded-2xl text-slate-400 hover:text-white border border-white/5"
+                  className="p-2.5 glass rounded-2xl text-slate-400 hover:text-white border border-white/5"
                 >
-                  <X size={24} />
+                  <X size={20} />
                 </motion.button>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 mb-10 relative z-10">
+              <div className="grid grid-cols-2 gap-3 mb-8 relative z-10">
                 {navItems.map((item) => (
                   <Link
                     key={item.path}
                     to={item.path}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
-                      "flex flex-col items-center gap-3 p-6 rounded-[2rem] border transition-all group perspective-1000",
+                      "flex flex-col items-center gap-2 p-4 rounded-[1.8rem] border transition-all group",
                       isActive(item.path) 
                         ? "bg-gradient-to-br from-indigo-600/20 to-purple-600/20 border-indigo-500/30 text-white shadow-lg shadow-indigo-500/10" 
                         : "glass border-white/5 text-slate-400 hover:text-white hover:border-white/10"
                     )}
                   >
-                    <item.icon size={24} className="group-hover:scale-110 group-hover:rotate-12 transition-transform" />
-                    <span className="font-black text-xs uppercase">{item.label}</span>
+                    <item.icon size={22} className="group-hover:scale-110 group-hover:rotate-12 transition-transform" />
+                    <span className="font-black text-[10px] uppercase text-center">{item.label}</span>
                   </Link>
                 ))}
               </div>
 
-              <div className="space-y-4 relative z-10">
-                <motion.button
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => {
-                    setDarkMode(!darkMode);
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className="w-full flex items-center justify-between p-6 glass rounded-[2rem] font-black text-xs uppercase text-white border border-white/5"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="p-2 bg-white/5 rounded-xl">
-                      {darkMode ? <Sun size={20} className="text-amber-400" /> : <Moon size={20} className="text-indigo-400" />}
-                    </div>
-                    <span>{darkMode ? 'লাইট মুড' : 'ডার্ক মুড'}</span>
-                  </div>
-                  <div className={cn(
-                    "w-12 h-7 rounded-full relative transition-colors p-1",
-                    darkMode ? "bg-indigo-600 shadow-[0_0_15px_rgba(79,70,229,0.5)]" : "bg-slate-700"
-                  )}>
-                    <motion.div 
-                      animate={{ x: darkMode ? 20 : 0 }}
-                      className="w-5 h-5 bg-white rounded-full shadow-md" 
-                    />
-                  </div>
-                </motion.button>
-
+              <div className="space-y-3 relative z-10">
                 <motion.button
                   whileTap={{ scale: 0.98 }}
                   onClick={handleLogout}
-                  className="w-full flex items-center gap-4 p-6 bg-rose-500/10 text-rose-400 rounded-[2rem] font-black text-xs uppercase border border-rose-500/20 shadow-lg shadow-rose-500/5"
+                  className="w-full flex items-center gap-4 p-5 bg-rose-500/10 text-rose-400 rounded-[1.8rem] font-black text-xs uppercase border border-rose-500/20 shadow-lg shadow-rose-500/5"
                 >
                   <div className="p-2 bg-rose-500/20 rounded-xl">
-                    <LogOut size={20} />
+                    <LogOut size={18} />
                   </div>
                   <span>লগআউট করুন</span>
                 </motion.button>
