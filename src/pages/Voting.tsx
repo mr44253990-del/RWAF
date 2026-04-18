@@ -36,7 +36,7 @@ export default function Voting() {
     <div className="max-w-3xl mx-auto space-y-10 perspective-1000">
       <header>
         <h1 className="text-4xl font-black text-white tracking-tight uppercase">ভোট ও মতামত</h1>
-        <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.4em] mt-3 opacity-80">ফাউন্ডেশনের বিভিন্ন সিদ্ধান্তে আপনার মতামত দিন</p>
+        <p className="text-slate-500 text-xs font-black uppercase mt-3 opacity-80">ফাউন্ডেশনের বিভিন্ন সিদ্ধান্তে আপনার মতামত দিন</p>
       </header>
 
       <div className="space-y-8">
@@ -46,7 +46,7 @@ export default function Voting() {
             animate={{ opacity: 1, scale: 1 }}
             className="glass-card p-20 border border-dashed border-white/10 text-center"
           >
-            <p className="text-slate-500 font-black uppercase tracking-[0.3em]">বর্তমানে কোন সক্রিয় ভোট নেই।</p>
+            <p className="text-slate-500 font-black uppercase">বর্তমানে কোন সক্রিয় ভোট নেই।</p>
           </motion.div>
         ) : (
           polls.map((poll, pIdx) => {
@@ -70,7 +70,7 @@ export default function Voting() {
                   </div>
                   <div>
                     <h3 className="font-black text-white text-2xl uppercase tracking-tight leading-tight group-hover:text-indigo-400 transition-colors">{poll.question}</h3>
-                    <div className="flex items-center gap-4 mt-3 text-[10px] text-slate-500 font-black uppercase tracking-widest">
+                    <div className="flex items-center gap-4 mt-3 text-xs text-slate-500 font-black uppercase transition-all">
                       <span className="flex items-center gap-2 bg-white/5 px-3 py-1 rounded-full"><Users size={14} className="text-indigo-400" /> {totalVotes} জন ভোট দিয়েছেন</span>
                       {hasVoted && <span className="text-emerald-400 flex items-center gap-2 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20"><CheckCircle2 size={14} /> আপনি ভোট দিয়েছেন</span>}
                     </div>
@@ -107,7 +107,7 @@ export default function Voting() {
                         
                         <div className="absolute inset-0 px-6 flex justify-between items-center z-10">
                           <span className={cn(
-                            "font-black text-sm uppercase tracking-widest transition-colors",
+                            "font-black text-sm uppercase transition-colors",
                             hasVoted ? "text-slate-300" : "text-slate-500 group-hover/opt:text-white"
                           )}>
                             {opt.text}
@@ -134,7 +134,7 @@ export default function Voting() {
                   <motion.p 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="mt-6 text-[10px] text-slate-500 font-black uppercase tracking-[0.2em] flex items-center gap-3 justify-center"
+                    className="mt-6 text-xs text-slate-500 font-black uppercase flex items-center gap-3 justify-center"
                   >
                     <BarChart size={14} className="text-indigo-500" /> ফলাফল দেখতে ভোট দিন
                   </motion.p>

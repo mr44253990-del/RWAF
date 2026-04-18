@@ -168,27 +168,27 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="space-y-12 perspective-1000 pb-20">
+    <div className="space-y-12 pb-20">
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 relative z-10">
         <div className="relative group">
           <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
           <motion.h1 
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-5xl md:text-6xl font-black text-white tracking-tighter uppercase relative"
+            className="text-5xl md:text-6xl font-black text-white uppercase relative"
           >
             স্বাগতম, <span className="text-gradient drop-shadow-[0_0_15px_rgba(99,102,241,0.3)]">{profile?.name}</span>!
           </motion.h1>
-          <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.5em] mt-4 opacity-80 flex items-center gap-3">
+          <p className="text-slate-500 text-xs font-black uppercase mt-4 opacity-80 flex items-center gap-3">
             <span className="w-8 h-[1px] bg-indigo-500/50" />
             রামনগর যুব-কল্যান ফাউন্ডেশন ড্যাশবোর্ড
           </p>
         </div>
-        <div className="relative group perspective-1000">
+        <div className="relative group">
           <motion.button 
-            whileHover={{ scale: 1.1, rotateY: 15, rotateX: -10 }}
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="p-6 glass rounded-[2.5rem] text-slate-400 hover:text-indigo-400 transition-all border border-white/5 hover:border-indigo-500/30 shadow-[0_20px_40px_rgba(0,0,0,0.3)] relative overflow-hidden group/btn"
+            className="p-6 glass rounded-[2.5rem] text-slate-400 hover:text-indigo-400 transition-all border border-white/5 hover:border-indigo-500/30 shadow-xl relative overflow-hidden group/btn"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity" />
             <Bell size={32} className="relative z-10" />
@@ -213,9 +213,9 @@ export default function Dashboard() {
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
-                whileHover={{ y: -10, scale: 1.02, rotateX: 2, rotateY: -2 }}
+                whileHover={{ y: -5, scale: 1.02 }}
                 className={cn(
-                  "p-8 rounded-[3rem] border flex items-start gap-6 shadow-[0_30px_60px_rgba(0,0,0,0.2)] backdrop-blur-3xl relative overflow-hidden group preserve-3d",
+                  "p-8 rounded-[3rem] border flex items-start gap-6 shadow-xl backdrop-blur-3xl relative overflow-hidden group",
                   notice.type === 'urgent' ? "bg-rose-500/5 border-rose-500/20" : 
                   notice.type === 'warning' ? "bg-amber-500/5 border-amber-500/20" : "bg-indigo-500/5 border-indigo-500/20"
                 )}
@@ -233,8 +233,8 @@ export default function Dashboard() {
                 </div>
                 <div className="flex-1 min-w-0 relative z-10">
                   <div className="flex justify-between items-center mb-3">
-                    <h4 className="font-black text-white text-lg truncate uppercase tracking-tight group-hover:text-indigo-400 transition-colors">{notice.title}</h4>
-                    <span className="text-[9px] font-black text-slate-500 uppercase tracking-[0.2em] shrink-0 ml-4 bg-white/5 px-3 py-1 rounded-full border border-white/5">
+                    <h4 className="font-black text-white text-lg truncate uppercase group-hover:text-indigo-400 transition-colors">{notice.title}</h4>
+                    <span className="text-xs font-black text-slate-500 uppercase shrink-0 ml-4 bg-white/5 px-3 py-1 rounded-full border border-white/5">
                       {format(new Date(notice.createdAt), 'hh:mm a')}
                     </span>
                   </div>
@@ -267,11 +267,11 @@ export default function Dashboard() {
           <motion.div 
             key={i}
             variants={{
-              hidden: { opacity: 0, y: 50, rotateX: -20, scale: 0.9 },
-              visible: { opacity: 1, y: 0, rotateX: 0, scale: 1 }
+              hidden: { opacity: 0, y: 50, scale: 0.9 },
+              visible: { opacity: 1, y: 0, scale: 1 }
             }}
-            whileHover={{ y: -15, rotateY: 8, scale: 1.03, rotateX: -5 }}
-            className="glass-card p-12 border border-white/5 relative overflow-hidden group preserve-3d shadow-[0_40px_80px_rgba(0,0,0,0.3)]"
+            whileHover={{ y: -5, scale: 1.03 }}
+            className="glass-card p-12 border border-white/5 relative overflow-hidden group shadow-2xl"
           >
             <div className={cn(
               "absolute -top-20 -right-20 w-64 h-64 blur-[100px] opacity-10 transition-all group-hover:scale-150 group-hover:opacity-20",
@@ -285,8 +285,8 @@ export default function Dashboard() {
                 <stat.icon size={40} />
               </div>
               <div>
-                <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.4em] mb-3 opacity-60">{stat.label}</p>
-                <h3 className={cn("text-5xl font-black tracking-tighter text-white")}>
+                <p className="text-slate-500 text-xs font-black uppercase mb-3 opacity-60">{stat.label}</p>
+                <h3 className={cn("text-5xl font-black text-white")}>
                   ৳{stat.value.toLocaleString()}
                 </h3>
               </div>
@@ -319,7 +319,7 @@ export default function Dashboard() {
               <div className="p-5 bg-white/10 rounded-2xl group-hover:rotate-12 group-hover:scale-110 transition-all relative z-10 shadow-2xl border border-white/20 backdrop-blur-md">
                 <action.icon size={32} className="text-white" />
               </div>
-              <span className="text-[10px] font-black text-white tracking-[0.3em] uppercase relative z-10 drop-shadow-md">{action.label}</span>
+              <span className="text-xs font-black text-white uppercase relative z-10 drop-shadow-md">{action.label}</span>
             </Link>
           </motion.div>
         ))}
@@ -340,8 +340,8 @@ export default function Dashboard() {
                 <BarChart3 size={32} />
               </div>
               <div>
-                <h2 className="text-3xl font-black text-white uppercase tracking-tighter">আয়-ব্যয় গ্রাফ</h2>
-                <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mt-1">বিগত ৬ মাসের আর্থিক চিত্র</p>
+                <h2 className="text-3xl font-black text-white uppercase">আয়-ব্যয় গ্রাফ</h2>
+                <p className="text-xs font-black text-slate-500 uppercase mt-1">বিগত ৬ মাসের আর্থিক চিত্র</p>
               </div>
             </div>
           </div>
@@ -362,8 +362,8 @@ export default function Dashboard() {
               <PieChartIcon size={32} />
             </div>
             <div>
-              <h2 className="text-3xl font-black text-white uppercase tracking-tighter">ব্যয় বিভাজন</h2>
-              <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mt-1">খাত ভিত্তিক খরচ</p>
+              <h2 className="text-3xl font-black text-white uppercase">ব্যয় বিভাজন</h2>
+              <p className="text-xs font-black text-slate-500 uppercase mt-1">খাত ভিত্তিক খরচ</p>
             </div>
           </div>
           <div className="flex-1 flex items-center justify-center min-h-[350px] relative z-10">
@@ -408,11 +408,11 @@ export default function Dashboard() {
                 <HistoryIcon size={32} />
               </div>
               <div>
-                <h2 className="text-3xl font-black text-white uppercase tracking-tighter">সাম্প্রতিক লেনদেন</h2>
-                <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mt-1">সর্বশেষ ১০টি ট্রানজেকশন</p>
+                <h2 className="text-3xl font-black text-white uppercase">সাম্প্রতিক লেনদেন</h2>
+                <p className="text-xs font-black text-slate-500 uppercase mt-1">সর্বশেষ ১০টি ট্রানজেকশন</p>
               </div>
             </div>
-            <Link to="/transactions" className="group/link flex items-center gap-3 text-indigo-400 text-[10px] font-black uppercase tracking-widest hover:text-indigo-300 transition-all">
+            <Link to="/transactions" className="group/link flex items-center gap-3 text-indigo-400 text-xs font-black uppercase hover:text-indigo-300 transition-all">
               সব দেখুন 
               <div className="p-2 bg-indigo-500/10 rounded-xl group-hover/link:translate-x-2 transition-transform">
                 <ChevronRight size={20} />
@@ -422,7 +422,7 @@ export default function Dashboard() {
           <div className="divide-y divide-white/5">
             {recentTransactions.length === 0 ? (
               <div className="p-24 text-center">
-                <p className="text-slate-500 font-black uppercase tracking-[0.4em] opacity-40">কোন লেনদেন পাওয়া যায়নি।</p>
+                <p className="text-slate-500 font-black uppercase opacity-40">কোন লেনদেন পাওয়া যায়নি।</p>
               </div>
             ) : (
               recentTransactions.map((t, i) => (
@@ -442,22 +442,22 @@ export default function Dashboard() {
                       {t.type === 'income' ? <TrendingUp size={28} /> : <TrendingDown size={28} />}
                     </div>
                     <div>
-                      <p className="font-black text-white text-xl uppercase tracking-tight group-hover:text-indigo-400 transition-colors">{t.userName}</p>
+                      <p className="font-black text-white text-xl uppercase group-hover:text-indigo-400 transition-colors">{t.userName}</p>
                       <div className="flex items-center gap-4 mt-2">
-                        <span className="text-[10px] text-slate-500 font-black uppercase tracking-widest bg-white/5 px-3 py-1 rounded-full">{t.category}</span>
-                        <span className="text-[10px] text-slate-600 font-black uppercase tracking-widest">{format(new Date(t.date), 'dd MMM yyyy')}</span>
+                        <span className="text-xs text-slate-500 font-black uppercase bg-white/5 px-3 py-1 rounded-full">{t.category}</span>
+                        <span className="text-xs text-slate-600 font-black uppercase">{format(new Date(t.date), 'dd MMM yyyy')}</span>
                       </div>
                     </div>
                   </div>
                   <div className="text-right relative z-10">
                     <p className={cn(
-                      "text-3xl font-black tracking-tighter",
+                      "text-3xl font-black",
                       t.type === 'income' ? "text-emerald-400" : "text-rose-400"
                     )}>
                       {t.type === 'income' ? '+' : '-'}৳{t.amount.toLocaleString()}
                     </p>
                     <span className={cn(
-                      "text-[9px] px-4 py-1.5 rounded-full font-black uppercase tracking-widest mt-3 inline-block border shadow-sm",
+                      "text-xs px-4 py-1.5 rounded-full font-black uppercase mt-3 inline-block border shadow-sm",
                       t.status === 'approved' ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : 
                       t.status === 'pending' ? "bg-amber-500/10 text-amber-400 border-amber-500/20" : "bg-rose-500/10 text-rose-400 border-rose-500/20"
                     )}>
@@ -483,11 +483,11 @@ export default function Dashboard() {
                 <Users size={32} />
               </div>
               <div>
-                <h2 className="text-3xl font-black text-white uppercase tracking-tighter">শীর্ষ দাতা</h2>
-                <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mt-1">সর্বোচ্চ অবদানকারী সদস্যগণ</p>
+                <h2 className="text-3xl font-black text-white uppercase">শীর্ষ দাতা</h2>
+                <p className="text-xs font-black text-slate-500 uppercase mt-1">সর্বোচ্চ অবদানকারী সদস্যগণ</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 px-4 py-2 bg-indigo-500/10 rounded-2xl border border-indigo-500/20 text-indigo-400 text-[10px] font-black uppercase tracking-widest">
+            <div className="flex items-center gap-3 px-4 py-2 bg-indigo-500/10 rounded-2xl border border-indigo-500/20 text-indigo-400 text-xs font-black uppercase">
               <Shield size={18} /> {users.length} সদস্য
             </div>
           </div>
@@ -503,7 +503,7 @@ export default function Dashboard() {
                 <div className="absolute right-0 top-0 w-1 h-full bg-amber-500 scale-y-0 group-hover:scale-y-100 transition-transform origin-bottom" />
                 <div className="flex items-center gap-8 relative z-10">
                   <div className={cn(
-                    "w-16 h-16 rounded-[1.5rem] flex items-center justify-center font-black text-xl transition-all border shadow-2xl preserve-3d",
+                    "w-16 h-16 rounded-[1.5rem] flex items-center justify-center font-black text-xl transition-all border shadow-2xl",
                     idx === 0 ? "bg-gradient-to-br from-amber-400 to-orange-600 text-white border-amber-300 scale-110 shadow-amber-500/30 rotate-12" : 
                     idx === 1 ? "bg-gradient-to-br from-slate-300 to-slate-500 text-white border-slate-200" :
                     idx === 2 ? "bg-gradient-to-br from-orange-500 to-red-700 text-white border-orange-400" : "bg-white/5 text-slate-500 border-white/10"
@@ -511,20 +511,20 @@ export default function Dashboard() {
                     {idx + 1}
                   </div>
                   <div>
-                    <p className="font-black text-white text-xl uppercase tracking-tight flex items-center gap-3 group-hover:text-amber-400 transition-colors">
+                    <p className="font-black text-white text-xl uppercase flex items-center gap-3 group-hover:text-amber-400 transition-colors">
                       {u.name} {u.role === 'admin' && <Shield size={18} className="text-indigo-400" />}
                     </p>
-                    <p className="text-[10px] text-slate-500 font-black uppercase tracking-widest mt-2 flex items-center gap-2">
+                    <p className="text-xs text-slate-500 font-black uppercase mt-2 flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-indigo-500/30" />
                       {profile?.role === 'admin' || u.uid === profile?.uid ? u.address : 'ঠিকানা সংরক্ষিত'}
                     </p>
                   </div>
                 </div>
                 <div className="text-right relative z-10">
-                  <p className="text-3xl font-black text-white tracking-tighter group-hover:text-amber-400 transition-colors">
+                  <p className="text-3xl font-black text-white group-hover:text-amber-400 transition-colors">
                     {u.contributionVisibility ? `৳${u.totalContribution.toLocaleString()}` : '৳••••'}
                   </p>
-                  <p className="text-[9px] font-black text-slate-600 uppercase tracking-widest mt-2">মোট অবদান</p>
+                  <p className="text-xs font-black text-slate-600 uppercase mt-2">মোট অবদান</p>
                 </div>
               </motion.div>
             ))}

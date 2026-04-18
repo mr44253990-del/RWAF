@@ -55,7 +55,7 @@ export default function ForgotPassword() {
             <KeyRound size={64} className="text-white drop-shadow-[0_10px_10px_rgba(0,0,0,0.3)]" />
           </motion.div>
           <h1 className="text-4xl font-black tracking-tighter mb-4 uppercase leading-tight">পাসওয়ার্ড ভুলে গেছেন?</h1>
-          <p className="text-indigo-100 font-black uppercase tracking-[0.3em] text-[10px] opacity-80">আপনার ইমেইল দিন, আমরা আপনাকে পাসওয়ার্ড রিসেট করার লিংক পাঠিয়ে দেব।</p>
+          <p className="text-indigo-100 font-black uppercase text-xs opacity-80">আপনার ইমেইল দিন, আমরা আপনাকে পাসওয়ার্ড রিসেট করার লিংক পাঠিয়ে দেব।</p>
         </div>
 
         <div className="p-16">
@@ -74,14 +74,14 @@ export default function ForgotPassword() {
                 <motion.div 
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className="bg-rose-500/10 text-rose-400 p-6 rounded-3xl mb-10 text-xs font-black border border-rose-500/20 text-center uppercase tracking-[0.2em] shadow-lg shadow-rose-500/5"
+                  className="bg-rose-500/10 text-rose-400 p-6 rounded-3xl mb-10 text-xs font-black border border-rose-500/20 text-center uppercase shadow-lg shadow-rose-500/5 transition-all"
                 >
                   {error}
                 </motion.div>
               )}
 
               <div className="space-y-4">
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-2">ইমেইল এড্রেস</label>
+                <label className="block text-xs font-black text-slate-500 uppercase ml-2">ইমেইল এড্রেস</label>
                 <div className="relative group">
                   <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-indigo-400 transition-all duration-300" size={24} />
                   <input
@@ -100,7 +100,7 @@ export default function ForgotPassword() {
                 whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-6 rounded-[2rem] font-black text-xl shadow-[0_20px_40px_rgba(79,70,229,0.3)] transition-all flex items-center justify-center gap-4 uppercase tracking-[0.2em] border border-white/10"
+                className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-6 rounded-[2rem] font-black text-xl shadow-[0_20px_40px_rgba(79,70,229,0.3)] transition-all flex items-center justify-center gap-4 uppercase border border-white/10"
               >
                 {loading ? (
                   <div className="w-8 h-8 border-4 border-white/30 border-t-white rounded-full animate-spin shadow-[0_0_15px_rgba(255,255,255,0.3)]" />
@@ -112,7 +112,7 @@ export default function ForgotPassword() {
           )}
 
           <div className="mt-16 pt-10 border-t border-white/5 text-center">
-            <Link to="/login" className="text-indigo-400 font-black hover:text-indigo-300 transition-all inline-flex items-center gap-3 uppercase tracking-[0.2em] text-[10px] border-b border-indigo-400/30 pb-1">
+            <Link to="/login" className="text-indigo-400 font-black hover:text-indigo-300 transition-all inline-flex items-center gap-3 uppercase text-xs border-b border-indigo-400/30 pb-1">
               <ArrowLeft size={20} /> লগইন পেজে ফিরে যান
             </Link>
           </div>

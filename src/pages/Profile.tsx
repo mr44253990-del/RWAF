@@ -125,10 +125,10 @@ export default function Profile() {
                   )}
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-indigo-400 font-black uppercase tracking-[0.2em] text-[10px]">
+                  <span className="px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-indigo-400 font-black uppercase text-xs flex items-center gap-2 transition-all">
                     {profile.profession || 'সদস্য'}
                   </span>
-                  <span className="px-4 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 font-black uppercase tracking-[0.2em] text-[10px] flex items-center gap-2">
+                  <span className="px-4 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 font-black uppercase text-xs flex items-center gap-2 transition-all">
                     <Activity size={12} /> একটিভ মেম্বার
                   </span>
                 </div>
@@ -139,7 +139,7 @@ export default function Profile() {
               whileHover={{ scale: 1.05, y: -5, boxShadow: "0 20px 40px rgba(79,70,229,0.3)" }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsEditing(!isEditing)}
-              className="px-10 py-5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-[2rem] font-black text-xs uppercase tracking-[0.2em] transition-all flex items-center gap-4 shadow-2xl border border-white/10"
+              className="px-10 py-5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-[2rem] font-black text-xs uppercase transition-all flex items-center gap-4 shadow-2xl border border-white/10"
             >
               <Edit3 size={18} /> প্রোফাইল এডিট
             </motion.button>
@@ -162,7 +162,7 @@ export default function Profile() {
                 <div className={cn("p-4 bg-white/5 rounded-2xl mb-4 w-fit group-hover:scale-110 transition-transform", item.color)}>
                   <item.icon size={24} />
                 </div>
-                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">{item.label}</p>
+                <p className="text-xs font-black text-slate-500 uppercase mb-2 transition-all">{item.label}</p>
                 <p className="text-sm text-white font-black truncate">{item.value || 'N/A'}</p>
               </motion.div>
             ))}
@@ -179,10 +179,10 @@ export default function Profile() {
         >
           <div className="absolute top-0 left-0 w-96 h-96 bg-emerald-500/10 blur-[120px] -ml-48 -mt-48 pointer-events-none"></div>
           <div className="relative z-10 space-y-4">
-            <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.4em] mb-2">আপনার মোট কন্ট্রিবিউশন</p>
+            <p className="text-slate-500 text-xs font-black uppercase mb-2">আপনার মোট কন্ট্রিবিউশন</p>
             <div className="flex items-baseline gap-4">
               <span className="text-7xl font-black text-gradient drop-shadow-2xl">৳{profile.totalContribution}</span>
-              <span className="text-emerald-500 font-black text-sm uppercase tracking-widest">+১২% এই মাসে</span>
+              <span className="text-emerald-500 font-black text-sm uppercase">+১২% এই মাসে</span>
             </div>
           </div>
           <motion.button 
@@ -190,7 +190,7 @@ export default function Profile() {
             whileTap={{ scale: 0.95 }}
             onClick={handleUpdateVisibility}
             className={cn(
-              "relative z-10 flex items-center gap-4 px-10 py-5 rounded-[2rem] text-xs font-black uppercase tracking-[0.2em] transition-all border shadow-2xl",
+              "relative z-10 flex items-center gap-4 px-10 py-5 rounded-[2rem] text-xs font-black uppercase transition-all border shadow-2xl",
               profile.contributionVisibility 
                 ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20 shadow-emerald-500/10" 
                 : "bg-white/5 text-slate-500 border-white/10"
@@ -210,7 +210,7 @@ export default function Profile() {
             <Zap size={32} />
           </div>
           <h3 className="text-3xl font-black text-white mb-2">লেভেল ৫</h3>
-          <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest">ফাউন্ডেশন মেম্বারশিপ</p>
+          <p className="text-slate-500 text-xs font-black uppercase transition-all">ফাউন্ডেশন মেম্বারশিপ</p>
         </motion.div>
       </div>
 
@@ -233,7 +233,7 @@ export default function Profile() {
             <form onSubmit={handleSubmitRequest} className="space-y-10">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div className="space-y-4">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-2">আপনার নাম</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">আপনার নাম</label>
                   <input 
                     type="text" 
                     className="w-full px-8 py-6 glass border border-white/10 rounded-[2rem] outline-none focus:ring-2 focus:ring-indigo-500 text-white font-black placeholder:text-slate-800 transition-all"
@@ -242,7 +242,7 @@ export default function Profile() {
                   />
                 </div>
                 <div className="space-y-4">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-2">বর্তমান ঠিকানা</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">বর্তমান ঠিকানা</label>
                   <input 
                     type="text" 
                     className="w-full px-8 py-6 glass border border-white/10 rounded-[2rem] outline-none focus:ring-2 focus:ring-indigo-500 text-white font-black placeholder:text-slate-800 transition-all"
@@ -251,7 +251,7 @@ export default function Profile() {
                   />
                 </div>
                 <div className="md:col-span-2 space-y-4">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-2">জন্ম তারিখ</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">জন্ম তারিখ</label>
                   <input 
                     type="date" 
                     className="w-full px-8 py-6 glass border border-white/10 rounded-[2rem] outline-none focus:ring-2 focus:ring-indigo-500 text-white font-black transition-all [color-scheme:dark]"
@@ -264,7 +264,7 @@ export default function Profile() {
                 whileHover={{ scale: 1.02, y: -5, boxShadow: "0 20px 40px rgba(79,70,229,0.3)" }}
                 whileTap={{ scale: 0.98 }}
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 text-white py-6 rounded-[2.5rem] font-black uppercase tracking-[0.3em] text-sm shadow-2xl disabled:opacity-50 border border-white/10"
+                className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 text-white py-6 rounded-[2.5rem] font-black uppercase text-sm shadow-2xl disabled:opacity-50 border border-white/10"
               >
                 {loading ? (
                   <div className="w-8 h-8 border-4 border-white/30 border-t-white rounded-full animate-spin mx-auto" />
@@ -286,7 +286,7 @@ export default function Profile() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
           <div className="space-y-2">
             <h3 className="text-4xl font-black text-white uppercase tracking-tighter">অ্যাডমিন সাপোর্ট</h3>
-            <p className="text-slate-500 text-sm font-black uppercase tracking-widest">যেকোনো প্রয়োজনে আমাদের সাথে যোগাযোগ করুন</p>
+            <p className="text-slate-500 text-sm font-black uppercase">যেকোনো প্রয়োজনে আমাদের সাথে যোগাযোগ করুন</p>
           </div>
           <div className="w-20 h-20 bg-rose-500/10 rounded-[2rem] flex items-center justify-center text-rose-400 border border-rose-500/20">
             <Phone size={32} />
@@ -310,7 +310,7 @@ export default function Profile() {
               <div className={cn("p-5 bg-white/5 rounded-2xl mb-6 w-fit group-hover/item:scale-110 transition-transform shadow-inner", item.color)}>
                 <item.icon size={28} />
               </div>
-              <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-2">{item.label}</p>
+              <p className="text-xs font-black text-slate-500 uppercase mb-2 transition-all">{item.label}</p>
               <p className="text-sm text-white font-black truncate">{item.value}</p>
             </motion.a>
           ))}

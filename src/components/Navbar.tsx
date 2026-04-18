@@ -49,7 +49,7 @@ export default function Navbar({ darkMode, setDarkMode }: { darkMode: boolean, s
           >
             <Shield size={28} />
           </motion.div>
-          <span className="font-black text-white text-xl tracking-tight hidden lg:block text-gradient uppercase">রামনগর যুব-কল্যান</span>
+          <span className="font-black text-white text-xl hidden lg:block text-gradient uppercase">রামনগর যুব-কল্যান</span>
         </Link>
 
         <div className="flex items-center gap-1 bg-white/5 p-1.5 rounded-[1.8rem] border border-white/5 relative z-10">
@@ -60,7 +60,7 @@ export default function Navbar({ darkMode, setDarkMode }: { darkMode: boolean, s
                 key={item.path}
                 to={item.path}
                 className={cn(
-                  "relative px-5 py-2.5 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 overflow-hidden group",
+                  "relative px-5 py-2.5 rounded-2xl text-xs font-black uppercase transition-all flex items-center gap-2 overflow-hidden group",
                   active ? "text-white" : "text-slate-400 hover:text-white"
                 )}
               >
@@ -94,7 +94,7 @@ export default function Navbar({ darkMode, setDarkMode }: { darkMode: boolean, s
             whileHover={{ scale: 1.05, x: 5 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleLogout}
-            className="flex items-center gap-3 px-6 py-3 bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 rounded-2xl transition-all font-black text-[10px] uppercase tracking-widest border border-rose-500/20 shadow-lg shadow-rose-500/10"
+            className="flex items-center gap-3 px-6 py-3 bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 rounded-2xl transition-all font-black text-xs uppercase border border-rose-500/20 shadow-lg shadow-rose-500/10"
           >
             <LogOut size={18} />
             লগআউট
@@ -123,7 +123,7 @@ export default function Navbar({ darkMode, setDarkMode }: { darkMode: boolean, s
                 />
               )}
               <item.icon size={22} className={cn("group-active:scale-90 transition-transform", active && "drop-shadow-[0_0_8px_rgba(99,102,241,0.5)]")} />
-              <span className="text-[9px] font-black tracking-widest uppercase">{item.label}</span>
+              <span className="text-[11px] font-black uppercase">{item.label}</span>
             </Link>
           );
         })}
@@ -136,7 +136,7 @@ export default function Navbar({ darkMode, setDarkMode }: { darkMode: boolean, s
           <div className="p-2 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
             <Menu size={22} />
           </div>
-          <span className="text-[9px] font-black tracking-widest uppercase">মেনু</span>
+          <span className="text-[11px] font-black uppercase">মেনু</span>
         </motion.button>
       </nav>
 
@@ -166,8 +166,8 @@ export default function Navbar({ darkMode, setDarkMode }: { darkMode: boolean, s
                     <Shield size={32} />
                   </div>
                   <div>
-                    <h3 className="font-black text-white text-xl uppercase tracking-tight">মেনু অপশন</h3>
-                    <p className="text-[10px] text-slate-500 font-black uppercase tracking-widest mt-1">আপনার প্রয়োজনীয় অপশন বেছে নিন</p>
+                    <h3 className="font-black text-white text-xl uppercase">মেনু অপশন</h3>
+                    <p className="text-xs text-slate-500 font-black uppercase mt-1">আপনার প্রয়োজনীয় অপশন বেছে নিন</p>
                   </div>
                 </div>
                 <motion.button 
@@ -194,7 +194,7 @@ export default function Navbar({ darkMode, setDarkMode }: { darkMode: boolean, s
                     )}
                   >
                     <item.icon size={24} className="group-hover:scale-110 group-hover:rotate-12 transition-transform" />
-                    <span className="font-black text-[10px] uppercase tracking-widest">{item.label}</span>
+                    <span className="font-black text-xs uppercase">{item.label}</span>
                   </Link>
                 ))}
               </div>
@@ -206,7 +206,7 @@ export default function Navbar({ darkMode, setDarkMode }: { darkMode: boolean, s
                     setDarkMode(!darkMode);
                     setIsMobileMenuOpen(false);
                   }}
-                  className="w-full flex items-center justify-between p-6 glass rounded-[2rem] font-black text-[10px] uppercase tracking-[0.2em] text-white border border-white/5"
+                  className="w-full flex items-center justify-between p-6 glass rounded-[2rem] font-black text-xs uppercase text-white border border-white/5"
                 >
                   <div className="flex items-center gap-4">
                     <div className="p-2 bg-white/5 rounded-xl">
@@ -228,7 +228,7 @@ export default function Navbar({ darkMode, setDarkMode }: { darkMode: boolean, s
                 <motion.button
                   whileTap={{ scale: 0.98 }}
                   onClick={handleLogout}
-                  className="w-full flex items-center gap-4 p-6 bg-rose-500/10 text-rose-400 rounded-[2rem] font-black text-[10px] uppercase tracking-[0.2em] border border-rose-500/20 shadow-lg shadow-rose-500/5"
+                  className="w-full flex items-center gap-4 p-6 bg-rose-500/10 text-rose-400 rounded-[2rem] font-black text-xs uppercase border border-rose-500/20 shadow-lg shadow-rose-500/5"
                 >
                   <div className="p-2 bg-rose-500/20 rounded-xl">
                     <LogOut size={20} />

@@ -38,7 +38,7 @@ export default function Transactions() {
     <div className="space-y-10 perspective-1000">
       <header>
         <h1 className="text-4xl font-black text-white tracking-tight uppercase">লেনদেন ইতিহাস</h1>
-        <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.4em] mt-3 opacity-80">ফাউন্ডেশনের সকল আয় ও ব্যয়ের বিস্তারিত তালিকা</p>
+        <p className="text-slate-500 text-xs font-black uppercase mt-3 opacity-80">ফাউন্ডেশনের সকল আয় ও ব্যয়ের বিস্তারিত তালিকা</p>
       </header>
 
       <div className="glass-card p-8 border border-white/5 flex flex-col md:flex-row gap-6">
@@ -64,7 +64,7 @@ export default function Transactions() {
               whileTap={{ scale: 0.95 }}
               onClick={() => setFilter(btn.id as any)}
               className={cn(
-                "px-8 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all border",
+                "px-8 py-4 rounded-2xl text-xs font-black uppercase transition-all border",
                 filter === btn.id 
                   ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white border-transparent shadow-[0_10px_20px_rgba(79,70,229,0.3)]" 
                   : "glass border-white/5 text-slate-500 hover:text-white hover:border-white/20"
@@ -83,7 +83,7 @@ export default function Transactions() {
       >
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
-            <thead className="bg-white/5 text-slate-500 text-[10px] uppercase font-black tracking-[0.2em]">
+            <thead className="bg-white/5 text-slate-500 text-xs uppercase font-black">
               <tr>
                 <th className="px-10 py-6">লেনদেন</th>
                 <th className="px-10 py-6">ক্যাটাগরি</th>
@@ -97,12 +97,12 @@ export default function Transactions() {
                 <tr>
                   <td colSpan={5} className="px-10 py-24 text-center">
                     <div className="w-12 h-12 border-[6px] border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto mb-6 shadow-[0_0_20px_rgba(79,70,229,0.2)]" />
-                    <p className="text-slate-500 font-black uppercase tracking-[0.3em]">লোড হচ্ছে...</p>
+                    <p className="text-slate-500 font-black uppercase">লোড হচ্ছে...</p>
                   </td>
                 </tr>
               ) : filteredTransactions.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-10 py-24 text-center text-slate-500 font-black uppercase tracking-[0.3em]">কোন লেনদেন পাওয়া যায়নি।</td>
+                  <td colSpan={5} className="px-10 py-24 text-center text-slate-500 font-black uppercase">কোন লেনদেন পাওয়া যায়নি।</td>
                 </tr>
               ) : (
                 filteredTransactions.map((t, i) => (
@@ -124,17 +124,17 @@ export default function Transactions() {
                         </div>
                         <div>
                           <p className="font-black text-white text-lg uppercase tracking-tight group-hover:text-indigo-400 transition-colors">{t.userName}</p>
-                          <p className="text-[10px] text-slate-500 font-black uppercase tracking-[0.2em] mt-2">{t.type === 'income' ? 'আয়' : 'ব্যয়'}</p>
+                          <p className="text-xs text-slate-500 font-black uppercase mt-2">{t.type === 'income' ? 'আয়' : 'ব্যয়'}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-10 py-8">
-                      <span className="px-4 py-2 glass border border-white/10 text-slate-400 rounded-xl text-[10px] font-black uppercase tracking-widest group-hover:border-indigo-500/30 group-hover:text-indigo-400 transition-all">
+                      <span className="px-4 py-2 glass border border-white/10 text-slate-400 rounded-xl text-xs font-black uppercase group-hover:border-indigo-500/30 group-hover:text-indigo-400 transition-all">
                         {t.category}
                       </span>
                     </td>
                     <td className="px-10 py-8">
-                      <div className="flex items-center gap-3 text-slate-500 text-xs font-bold uppercase tracking-widest">
+                      <div className="flex items-center gap-3 text-slate-500 text-xs font-bold uppercase transition-all">
                         <Calendar size={14} className="text-indigo-500" />
                         {format(new Date(t.date), 'dd MMM yyyy')}
                       </div>

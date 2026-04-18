@@ -108,7 +108,7 @@ export default function FundManagement() {
           >
             ফান্ড <span className="text-gradient drop-shadow-[0_0_15px_rgba(99,102,241,0.3)]">ম্যানেজমেন্ট</span>
           </motion.h1>
-          <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.5em] mt-4 opacity-80 flex items-center gap-3">
+          <p className="text-slate-500 text-xs font-black uppercase mt-4 opacity-80 flex items-center gap-3">
             <span className="w-8 h-[1px] bg-indigo-500/50" />
             আপনার জমার হিসাব এবং নতুন জমা
           </p>
@@ -117,7 +117,7 @@ export default function FundManagement() {
           whileHover={{ scale: 1.05, y: -5, rotateX: -10 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsAddModalOpen(true)}
-          className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 text-white px-12 py-6 rounded-[2.5rem] font-black uppercase tracking-[0.2em] text-xs shadow-[0_20px_40px_rgba(79,70,229,0.4)] flex items-center gap-4 group relative overflow-hidden"
+          className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 text-white px-12 py-6 rounded-[2.5rem] font-black uppercase text-xs shadow-[0_20px_40px_rgba(79,70,229,0.4)] flex items-center gap-4 group relative overflow-hidden"
         >
           <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
           <Plus size={28} className="group-hover:rotate-90 transition-transform" /> 
@@ -136,7 +136,7 @@ export default function FundManagement() {
         <div className="p-12 relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-10 mb-16">
             <div className="space-y-4">
-              <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.5em] opacity-60">আপনার মোট জমা</p>
+              <p className="text-slate-500 text-xs font-black uppercase opacity-60">আপনার মোট জমা</p>
               <h2 className="text-7xl md:text-8xl font-black text-gradient drop-shadow-[0_0_20px_rgba(99,102,241,0.2)]">৳{profile?.totalContribution?.toLocaleString() || 0}</h2>
             </div>
             <motion.div 
@@ -149,12 +149,12 @@ export default function FundManagement() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
             <div className="p-8 glass border border-white/10 rounded-[2.5rem] group/item hover:border-indigo-500/30 transition-all relative overflow-hidden">
               <div className="absolute inset-0 bg-indigo-500/5 opacity-0 group-hover/item:opacity-100 transition-opacity" />
-              <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.3em] mb-4 relative z-10">এই মাসে জমা</p>
+              <p className="text-slate-500 text-xs font-black uppercase mb-4 relative z-10 transition-all">এই মাসে জমা</p>
               <p className="text-4xl font-black text-white relative z-10">৳0</p>
             </div>
             <div className="p-8 glass border border-white/10 rounded-[2.5rem] group/item hover:border-purple-500/30 transition-all relative overflow-hidden">
               <div className="absolute inset-0 bg-purple-500/5 opacity-0 group-hover/item:opacity-100 transition-opacity" />
-              <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.3em] mb-4 relative z-10">সদস্যপদ ধরণ</p>
+              <p className="text-slate-500 text-xs font-black uppercase mb-4 relative z-10 transition-all">সদস্যপদ ধরণ</p>
               <p className="text-4xl font-black text-white uppercase tracking-tighter relative z-10">{profile?.subscriptionType === 'monthly' ? 'মাসিক' : 'বাৎসরিক'}</p>
             </div>
           </div>
@@ -174,13 +174,13 @@ export default function FundManagement() {
           </div>
           <div>
             <h2 className="text-3xl font-black text-white uppercase tracking-tighter">জমার ইতিহাস</h2>
-            <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mt-1">আপনার সকল লেনদেনের তালিকা</p>
+            <p className="text-xs font-black text-slate-500 uppercase mt-1">আপনার সকল লেনদেনের তালিকা</p>
           </div>
         </div>
         <div className="divide-y divide-white/5">
           {transactions.length === 0 ? (
             <div className="p-24 text-center">
-              <p className="text-slate-500 font-black uppercase tracking-[0.4em] opacity-40">আপনি এখনো কোন টাকা জমা দেননি।</p>
+              <p className="text-slate-500 font-black uppercase opacity-40">আপনি এখনো কোন টাকা জমা দেননি।</p>
             </div>
           ) : (
             transactions.map((t, i) => (
@@ -202,7 +202,7 @@ export default function FundManagement() {
                   </div>
                   <div>
                     <p className="font-black text-white text-xl uppercase tracking-tight group-hover:text-indigo-400 transition-colors">{t.category}</p>
-                    <p className="text-[10px] text-slate-500 font-black uppercase tracking-widest mt-2 flex items-center gap-2">
+                    <p className="text-xs text-slate-500 font-black uppercase mt-2 flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-indigo-500/30" />
                       {format(new Date(t.date), 'dd MMM yyyy, hh:mm a')}
                     </p>
@@ -211,7 +211,7 @@ export default function FundManagement() {
                 <div className="text-right relative z-10">
                   <p className="text-3xl font-black text-white tracking-tighter group-hover:text-indigo-400 transition-colors">৳{t.amount.toLocaleString()}</p>
                   <span className={cn(
-                    "text-[9px] px-4 py-1.5 rounded-full font-black uppercase tracking-widest mt-3 inline-block border shadow-sm",
+                    "text-xs px-4 py-1.5 rounded-full font-black uppercase mt-3 inline-block border shadow-sm",
                     t.status === 'approved' ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : 
                     t.status === 'pending' ? "bg-amber-500/10 text-amber-400 border-amber-500/20" : "bg-rose-500/10 text-rose-400 border-rose-500/20"
                   )}>
@@ -246,7 +246,7 @@ export default function FundManagement() {
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-[80px] -mr-32 -mt-32 animate-pulse"></div>
                 <div className="relative z-10">
                   <h3 className="text-4xl font-black uppercase tracking-tighter">টাকা জমা দিন</h3>
-                  <p className="text-indigo-100 text-[10px] font-black uppercase tracking-[0.3em] mt-4 opacity-80">নিচের যে কোন মাধ্যমে টাকা পাঠিয়ে তথ্য দিন</p>
+                  <p className="text-indigo-100 text-xs font-black uppercase mt-4 opacity-80">নিচের যে কোন মাধ্যমে টাকা পাঠিয়ে তথ্য দিন</p>
                 </div>
                 <motion.button 
                   whileHover={{ rotate: 90, scale: 1.1 }}
@@ -280,7 +280,7 @@ export default function FundManagement() {
                     >
                       <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover/method:opacity-100 transition-opacity" />
                       <img src={item.logo} alt={item.label} className="w-16 h-16 object-contain relative z-10 drop-shadow-lg" referrerPolicy="no-referrer" />
-                      <span className="text-[10px] font-black text-white uppercase tracking-widest relative z-10">{item.label}</span>
+                      <span className="text-xs font-black text-white uppercase relative z-10">{item.label}</span>
                       {method === item.id && (
                         <motion.div 
                           layoutId="method-active"
@@ -293,7 +293,7 @@ export default function FundManagement() {
 
                 <div className="p-10 glass border border-white/10 rounded-[3rem] relative overflow-hidden group/number shadow-inner">
                   <div className="absolute -top-10 -right-10 w-48 h-48 bg-indigo-500/10 blur-[60px] transition-all group-hover/number:scale-150"></div>
-                  <p className="text-[10px] text-slate-500 font-black uppercase tracking-[0.4em] mb-4 relative z-10 opacity-60">সেন্ড মানি করুন এই নম্বরে:</p>
+                  <p className="text-xs text-slate-500 font-black uppercase mb-4 relative z-10 opacity-60">সেন্ড মানি করুন এই নম্বরে:</p>
                   <div className="flex items-center justify-between relative z-10">
                     <p className="text-5xl font-black text-white tracking-tighter drop-shadow-md">{getMethodNumber()}</p>
                     <div className="p-4 bg-white/5 rounded-2xl border border-white/10 text-indigo-400">
@@ -304,7 +304,7 @@ export default function FundManagement() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                   <div className="space-y-4">
-                    <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-2">টাকার পরিমাণ</label>
+                    <label className="block text-xs font-black text-slate-500 uppercase ml-2">টাকার পরিমাণ</label>
                     <div className="relative group/input">
                       <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-3xl blur opacity-0 group-hover/input:opacity-100 transition-opacity" />
                       <span className="absolute left-8 top-1/2 -translate-y-1/2 font-black text-indigo-400 text-3xl relative z-10">৳</span>
@@ -320,13 +320,13 @@ export default function FundManagement() {
                   </div>
 
                   <div className="space-y-4">
-                    <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-2">ট্রানজেকশন আইডি (TxID)</label>
+                    <label className="block text-xs font-black text-slate-500 uppercase ml-2">ট্রানজেকশন আইডি (TxID)</label>
                     <div className="relative group/input">
                       <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 rounded-3xl blur opacity-0 group-hover/input:opacity-100 transition-opacity" />
                       <input
                         type="text"
                         required
-                        className="w-full px-8 py-6 glass border border-white/10 rounded-[2rem] focus:ring-2 focus:ring-indigo-500 outline-none font-black text-xl text-white placeholder:text-slate-800 uppercase tracking-[0.2em] relative z-10 transition-all"
+                        className="w-full px-8 py-6 glass border border-white/10 rounded-[2rem] focus:ring-2 focus:ring-indigo-500 outline-none font-black text-xl text-white placeholder:text-slate-800 uppercase relative z-10 transition-all"
                         value={txId}
                         onChange={(e) => setTxId(e.target.value)}
                         placeholder="ABC123XYZ"
@@ -340,7 +340,7 @@ export default function FundManagement() {
                   whileTap={{ scale: 0.98 }}
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 text-white py-8 rounded-[2.5rem] font-black uppercase tracking-[0.3em] text-sm shadow-[0_30px_60px_rgba(79,70,229,0.4)] flex items-center justify-center gap-6 disabled:opacity-50 relative overflow-hidden group/submit"
+                  className="w-full bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 text-white py-8 rounded-[2.5rem] font-black uppercase text-sm shadow-[0_30px_60px_rgba(79,70,229,0.4)] flex items-center justify-center gap-6 disabled:opacity-50 relative overflow-hidden group/submit"
                 >
                   <div className="absolute inset-0 bg-white/10 opacity-0 group-hover/submit:opacity-100 transition-opacity" />
                   {loading ? (

@@ -315,7 +315,7 @@ function UserManagement() {
                         <p className="text-lg font-bold text-white tracking-tight group-hover:text-indigo-400 transition-colors">
                           {u.name} 
                           {u.role === 'admin' && (
-                            <span className="text-[10px] px-2 py-0.5 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20 uppercase ml-2">Admin</span>
+                            <span className="text-xs px-2 py-0.5 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20 uppercase ml-2">Admin</span>
                           )}
                         </p>
                         <p className="text-xs text-slate-500 font-bold uppercase mt-1">{u.mobileNo}</p>
@@ -426,7 +426,7 @@ function UserManagement() {
 
               <form onSubmit={handleAddUser} className="p-10 grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
                 <div className="space-y-3">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">নাম</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">নাম</label>
                   <input 
                     type="text" required
                     placeholder="পুরো নাম লিখুন..."
@@ -436,7 +436,7 @@ function UserManagement() {
                   />
                 </div>
                 <div className="space-y-3">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">ইমেইল</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">ইমেইল</label>
                   <input 
                     type="email" required
                     placeholder="example@mail.com"
@@ -446,7 +446,7 @@ function UserManagement() {
                   />
                 </div>
                 <div className="space-y-3">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">পাসওয়ার্ড</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">পাসওয়ার্ড</label>
                   <input 
                     type="password" required minLength={6}
                     placeholder="কমপক্ষে ৬ অক্ষরের পাসওয়ার্ড"
@@ -456,7 +456,7 @@ function UserManagement() {
                   />
                 </div>
                 <div className="space-y-3">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">মোবাইল নং</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">মোবাইল নং</label>
                   <input 
                     type="tel" required
                     placeholder="০১XXXXXXXXX"
@@ -466,7 +466,7 @@ function UserManagement() {
                   />
                 </div>
                 <div className="space-y-3">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">চাঁদার পরিমান</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">চাঁদার পরিমান</label>
                   <div className="relative">
                     <span className="absolute left-6 top-1/2 -translate-y-1/2 font-black text-indigo-500 text-xl">৳</span>
                     <input 
@@ -479,7 +479,7 @@ function UserManagement() {
                   </div>
                 </div>
                 <div className="md:col-span-2 space-y-3">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">ঠিকানা</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">ঠিকানা</label>
                   <textarea 
                     className="w-full px-6 py-5 bg-white/5 border border-white/5 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-500/50 text-white font-bold transition-all placeholder:text-slate-700 h-32 resize-none"
                     placeholder="পুরো ঠিকানা লিখুন..."
@@ -537,7 +537,7 @@ function UserManagement() {
                 </div>
 
                 <div className="space-y-3">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">টাকার পরিমাণ</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">টাকার পরিমাণ</label>
                   <div className="relative">
                     <span className="absolute left-6 top-1/2 -translate-y-1/2 font-black text-emerald-500 text-2xl">৳</span>
                     <input 
@@ -554,7 +554,7 @@ function UserManagement() {
                   whileHover={{ scale: 1.02, y: -5 }}
                   whileTap={{ scale: 0.98 }}
                   disabled={actionLoading}
-                  className="w-full bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 text-white py-6 rounded-[2rem] font-black uppercase tracking-[0.3em] text-sm shadow-[0_20px_40px_rgba(16,185,129,0.4)] disabled:opacity-50 disabled:cursor-not-allowed transition-all relative overflow-hidden group/btn"
+                  className="w-full bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 text-white py-6 rounded-[2rem] font-black uppercase text-sm shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all relative overflow-hidden group/btn"
                 >
                   <div className="absolute inset-0 bg-white/10 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
                   {actionLoading ? 'প্রসেসিং...' : 'ফান্ড যোগ করুন'}
@@ -599,7 +599,7 @@ function UserManagement() {
 
               <form onSubmit={handleEditUser} className="p-10 grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
                 <div className="space-y-3">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">নাম</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">নাম</label>
                   <input 
                     type="text" required
                     placeholder="পুরো নাম লিখুন..."
@@ -609,7 +609,7 @@ function UserManagement() {
                   />
                 </div>
                 <div className="space-y-3">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">মোবাইল নং</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">মোবাইল নং</label>
                   <input 
                     type="tel" required
                     placeholder="০১XXXXXXXXX"
@@ -619,7 +619,7 @@ function UserManagement() {
                   />
                 </div>
                 <div className="space-y-3">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">চাঁদার পরিমান</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">চাঁদার পরিমান</label>
                   <div className="relative">
                     <span className="absolute left-6 top-1/2 -translate-y-1/2 font-black text-indigo-500 text-xl">৳</span>
                     <input 
@@ -632,7 +632,7 @@ function UserManagement() {
                   </div>
                 </div>
                 <div className="md:col-span-2 space-y-3">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">ঠিকানা</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">ঠিকানা</label>
                   <textarea 
                     required
                     placeholder="সদস্যের বর্তমান ঠিকানা লিখুন..."
@@ -646,7 +646,7 @@ function UserManagement() {
                     whileHover={{ scale: 1.02, y: -5 }}
                     whileTap={{ scale: 0.98 }}
                     disabled={actionLoading}
-                    className="w-full bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 text-white py-6 rounded-[2rem] font-black uppercase tracking-[0.3em] text-sm shadow-[0_20px_40px_rgba(79,70,229,0.4)] disabled:opacity-50 disabled:cursor-not-allowed transition-all relative overflow-hidden group/btn"
+                    className="w-full bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 text-white py-6 rounded-[2rem] font-black uppercase text-sm shadow-[0_20px_40px_rgba(79,70,229,0.4)] disabled:opacity-50 disabled:cursor-not-allowed transition-all relative overflow-hidden group/btn"
                   >
                     <div className="absolute inset-0 bg-white/10 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
                     {actionLoading ? 'প্রসেসিং...' : 'তথ্য আপডেট করুন'}
@@ -725,14 +725,14 @@ function FundApproval() {
             <div className="flex justify-between items-start mb-10 relative z-10">
               <div>
                 <p className="text-2xl font-black text-white uppercase tracking-tight group-hover:text-indigo-400 transition-colors">{t.userName}</p>
-                <p className="text-[10px] text-slate-500 font-black tracking-[0.2em] uppercase mt-3 flex items-center gap-2">
+                <p className="text-xs text-slate-500 font-black uppercase mt-3 flex items-center gap-2 transition-all">
                   <Clock size={14} />
                   {format(new Date(t.date), 'dd MMM, hh:mm a')}
                 </p>
               </div>
               <div className="text-right">
                 <p className="text-4xl font-black text-gradient drop-shadow-[0_0_15px_rgba(99,102,241,0.3)]">৳{t.amount?.toLocaleString()}</p>
-                <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mt-3 bg-white/5 px-3 py-1 rounded-lg border border-white/10">{t.paymentMethod} • {t.transactionId}</p>
+                <p className="text-xs font-black text-slate-500 uppercase mt-3 bg-white/5 px-3 py-1 rounded-lg border border-white/10">{t.paymentMethod} • {t.transactionId}</p>
               </div>
             </div>
             <div className="flex gap-6 relative z-10">
@@ -760,7 +760,7 @@ function FundApproval() {
             <div className="p-10 bg-white/5 rounded-[3rem] border border-white/5">
               <Check size={64} className="text-slate-700" />
             </div>
-            <p className="text-slate-500 font-black uppercase tracking-[0.5em] opacity-40">কোন পেন্ডিং রিকোয়েস্ট নেই।</p>
+            <p className="text-slate-500 font-black uppercase opacity-40">কোন পেন্ডিং রিকোয়েস্ট নেই।</p>
           </div>
         )}
       </div>
@@ -850,7 +850,7 @@ function ExpenseManagement() {
           whileHover={{ scale: 1.05, y: -5, rotateX: -10 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setShowAddModal(true)}
-          className="bg-gradient-to-r from-rose-600 via-rose-500 to-pink-600 text-white px-12 py-6 rounded-[2.5rem] font-black uppercase tracking-[0.2em] text-xs shadow-[0_20px_40px_rgba(225,29,72,0.4)] flex items-center gap-4 group/btn relative overflow-hidden"
+          className="bg-gradient-to-r from-rose-600 via-rose-500 to-pink-600 text-white px-12 py-6 rounded-[2.5rem] font-black uppercase text-xs shadow-xl flex items-center gap-4 group/btn relative overflow-hidden"
         >
           <div className="absolute inset-0 bg-white/10 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
           <Plus size={28} className="group-hover:rotate-90 transition-transform" /> 
@@ -871,7 +871,7 @@ function ExpenseManagement() {
             <div className="flex justify-between items-start mb-10 relative z-10">
               <div>
                 <p className="text-2xl font-black text-white uppercase tracking-tight group-hover:text-rose-400 transition-colors">{exp.category}</p>
-                <p className="text-[10px] text-slate-500 font-black tracking-[0.2em] uppercase mt-3 flex items-center gap-2">
+                <p className="text-xs text-slate-500 font-black uppercase mt-3 flex items-center gap-2 transition-all">
                   <Clock size={14} />
                   {format(new Date(exp.date), 'dd MMM yyyy')}
                 </p>
@@ -938,7 +938,7 @@ function ExpenseManagement() {
               <form onSubmit={handleAddExpense} className="p-10 space-y-8 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">টাকার পরিমান</label>
+                    <label className="block text-xs font-black text-slate-500 uppercase ml-2">টাকার পরিমান</label>
                     <div className="relative group">
                       <span className="absolute left-6 top-1/2 -translate-y-1/2 font-black text-rose-500 text-xl group-focus-within:scale-125 transition-transform">৳</span>
                       <input 
@@ -951,7 +951,7 @@ function ExpenseManagement() {
                     </div>
                   </div>
                   <div className="space-y-3">
-                    <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">তারিখ</label>
+                    <label className="block text-xs font-black text-slate-500 uppercase ml-2">তারিখ</label>
                     <div className="relative">
                       <Calendar className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-500" size={20} />
                       <input 
@@ -965,7 +965,7 @@ function ExpenseManagement() {
                 </div>
 
                 <div className="space-y-3">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">ক্যাটাগরি</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">ক্যাটাগরি</label>
                   <input 
                     type="text" required
                     placeholder="যেমন: ইফতার সামগ্রী, যাতায়াত খরচ"
@@ -976,7 +976,7 @@ function ExpenseManagement() {
                 </div>
 
                 <div className="space-y-3">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">বিস্তারিত বর্ণনা</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">বিস্তারিত বর্ণনা</label>
                   <textarea 
                     required
                     placeholder="ব্যয়ের বিস্তারিত তথ্য এখানে লিখুন..."
@@ -987,7 +987,7 @@ function ExpenseManagement() {
                 </div>
 
                 <div className="space-y-3">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">ফেসবুক পোস্ট লিংক (ঐচ্ছিক)</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">ফেসবুক পোস্ট লিংক (ঐচ্ছিক)</label>
                   <div className="relative">
                     <Smartphone className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-500" size={20} />
                     <input 
@@ -1004,7 +1004,7 @@ function ExpenseManagement() {
                   whileHover={{ scale: 1.02, y: -5 }}
                   whileTap={{ scale: 0.98 }}
                   disabled={loading}
-                  className="w-full bg-gradient-to-r from-rose-600 via-rose-500 to-pink-600 text-white py-6 rounded-[2rem] font-black uppercase tracking-[0.3em] text-sm shadow-[0_20px_40px_rgba(225,29,72,0.4)] disabled:opacity-50 disabled:cursor-not-allowed transition-all relative overflow-hidden group/btn"
+                  className="w-full bg-gradient-to-r from-rose-600 via-rose-500 to-pink-600 text-white py-6 rounded-[2rem] font-black uppercase text-sm shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all relative overflow-hidden group/btn"
                 >
                   <div className="absolute inset-0 bg-white/10 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
                   {loading ? 'প্রসেসিং...' : 'খরচ নিশ্চিত করুন'}
@@ -1101,7 +1101,7 @@ function NoticeManagement() {
           whileHover={{ scale: 1.05, y: -5, rotateX: -10 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setShowAddModal(true)}
-          className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 text-white px-12 py-6 rounded-[2.5rem] font-black uppercase tracking-[0.2em] text-xs shadow-[0_20px_40px_rgba(79,70,229,0.4)] flex items-center gap-4 group/btn relative overflow-hidden"
+          className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 text-white px-12 py-6 rounded-[2.5rem] font-black uppercase text-xs shadow-xl flex items-center gap-4 group/btn relative overflow-hidden"
         >
           <div className="absolute inset-0 bg-white/10 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
           <Plus size={28} className="group-hover:rotate-90 transition-transform" /> 
@@ -1161,7 +1161,7 @@ function NoticeManagement() {
               </div>
             </div>
             <p className="text-lg text-slate-400 font-bold leading-relaxed mb-8 relative z-10 opacity-80">{n.content}</p>
-            <div className="flex items-center gap-3 text-[10px] text-slate-500 font-black uppercase tracking-[0.3em] relative z-10 opacity-60">
+            <div className="flex items-center gap-3 text-xs text-slate-500 font-black uppercase relative z-10 opacity-60">
               <Clock size={14} />
               {format(new Date(n.createdAt), 'dd MMM yyyy, hh:mm a')}
             </div>
@@ -1202,7 +1202,7 @@ function NoticeManagement() {
 
               <form onSubmit={handleAddNotice} className="p-10 space-y-8 relative z-10">
                 <div className="space-y-3">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">টাইটেল</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">টাইটেল</label>
                   <input 
                     type="text" required
                     placeholder="নোটিশের শিরোনাম লিখুন..."
@@ -1213,7 +1213,7 @@ function NoticeManagement() {
                 </div>
 
                 <div className="space-y-3">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">নোটিশের ধরণ</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">নোটিশের ধরণ</label>
                   <div className="grid grid-cols-3 gap-4">
                     {[
                       { id: 'info', label: 'সাধারণ', color: 'indigo' },
@@ -1238,7 +1238,7 @@ function NoticeManagement() {
                 </div>
 
                 <div className="space-y-3">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">নোটিশের বিস্তারিত</label>
+                  <label className="block text-xs font-black text-slate-500 uppercase ml-2">নোটিশের বিস্তারিত</label>
                   <textarea 
                     required
                     placeholder="নোটিশের বিস্তারিত তথ্য এখানে লিখুন..."
@@ -1252,7 +1252,7 @@ function NoticeManagement() {
                   whileHover={{ scale: 1.02, y: -5 }}
                   whileTap={{ scale: 0.98 }}
                   disabled={loading}
-                  className="w-full bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 text-white py-6 rounded-[2rem] font-black uppercase tracking-[0.3em] text-sm shadow-[0_20px_40px_rgba(79,70,229,0.4)] disabled:opacity-50 disabled:cursor-not-allowed transition-all relative overflow-hidden group/btn"
+                  className="w-full bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 text-white py-6 rounded-[2rem] font-black uppercase text-sm shadow-[0_20px_40px_rgba(79,70,229,0.4)] disabled:opacity-50 disabled:cursor-not-allowed transition-all relative overflow-hidden group/btn"
                 >
                   <div className="absolute inset-0 bg-white/10 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
                   {loading ? 'প্রসেসিং...' : 'নোটিশ পাবলিশ করুন'}
@@ -1411,7 +1411,7 @@ function ProfileRequestManagement() {
   if (loading) return (
     <div className="p-32 text-center">
       <div className="inline-block w-16 h-16 border-4 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin mb-8" />
-      <p className="text-slate-500 font-black uppercase tracking-[0.5em] animate-pulse">লোড হচ্ছে...</p>
+      <p className="text-slate-500 font-black uppercase animate-pulse">লোড হচ্ছে...</p>
     </div>
   );
 
@@ -1440,7 +1440,7 @@ function ProfileRequestManagement() {
             <div className="p-10 bg-white/5 rounded-[3rem] border border-white/5">
               <UserCheck size={64} className="text-slate-700" />
             </div>
-            <p className="text-slate-500 font-black uppercase tracking-[0.5em] opacity-40">কোন পেন্ডিং অনুরোধ নেই।</p>
+            <p className="text-slate-500 font-black uppercase opacity-40">কোন পেন্ডিং অনুরোধ নেই।</p>
           </div>
         ) : (
           requests.map((req, idx) => (
@@ -1459,7 +1459,7 @@ function ProfileRequestManagement() {
                   </div>
                   <div>
                     <h4 className="text-3xl font-black text-white uppercase tracking-tight group-hover:text-indigo-400 transition-colors">{req.userName}</h4>
-                    <p className="text-[10px] text-slate-500 font-black uppercase tracking-[0.3em] mt-2 flex items-center gap-2">
+                    <p className="text-xs text-slate-500 font-black uppercase mt-2 flex items-center gap-2">
                       <Clock size={14} />
                       {format(new Date(req.createdAt), 'PPpp')}
                     </p>
@@ -1560,7 +1560,7 @@ function PushNotificationPanel() {
           
           <form onSubmit={handleSend} className="space-y-10 relative z-10">
             <div className="space-y-4">
-              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">টাইটেল</label>
+              <label className="block text-xs font-black text-slate-500 uppercase ml-2">টাইটেল</label>
               <input 
                 type="text" 
                 required
@@ -1571,7 +1571,7 @@ function PushNotificationPanel() {
               />
             </div>
             <div className="space-y-4">
-              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">মেসেজ</label>
+              <label className="block text-xs font-black text-slate-500 uppercase ml-2">মেসেজ</label>
               <textarea 
                 required
                 rows={5}
@@ -1585,7 +1585,7 @@ function PushNotificationPanel() {
               whileHover={{ scale: 1.02, y: -5 }}
               whileTap={{ scale: 0.98 }}
               disabled={loading}
-              className="w-full bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 text-white py-8 rounded-[2.5rem] font-black uppercase tracking-[0.3em] text-sm shadow-[0_20px_40px_rgba(37,99,235,0.4)] flex items-center justify-center gap-6 disabled:opacity-50 relative overflow-hidden group/btn"
+              className="w-full bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 text-white py-8 rounded-[2.5rem] font-black uppercase text-sm shadow-[0_20px_40px_rgba(37,99,235,0.4)] flex items-center justify-center gap-6 disabled:opacity-50 relative overflow-hidden group/btn"
             >
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
               {loading ? 'পাঠানো হচ্ছে...' : <><Bell size={24} className="group-hover:rotate-12 transition-transform" /> সকল ইউজারকে পাঠান</>}
@@ -1674,7 +1674,7 @@ function GlobalSettings() {
       <form onSubmit={saveSettings} className="space-y-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="space-y-8">
-            <h3 className="text-xl font-black text-white uppercase tracking-widest flex items-center gap-4">
+            <h3 className="text-xl font-black text-white uppercase flex items-center gap-4 transition-all">
               <CreditCard className="text-indigo-400" /> পেমেন্ট নম্বরসমূহ
             </h3>
             <div className="grid grid-cols-1 gap-6">
@@ -1704,13 +1704,13 @@ function GlobalSettings() {
           </div>
 
           <div className="space-y-8">
-            <h3 className="text-xl font-black text-white uppercase tracking-widest flex items-center gap-4">
+            <h3 className="text-xl font-black text-white uppercase flex items-center gap-4 transition-all">
               <BarChart3 className="text-indigo-400" /> ফান্ড অ্যাডজাস্টমেন্ট
             </h3>
             <div className="glass-card p-10 border border-white/5 space-y-10 relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 blur-[100px] -mr-32 -mt-32" />
               <div className="space-y-4 relative z-10">
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">মোট ফান্ড (৳)</label>
+                <label className="block text-xs font-black text-slate-500 uppercase ml-2">মোট ফান্ড (৳)</label>
                 <div className="relative">
                   <span className="absolute left-6 top-1/2 -translate-y-1/2 font-black text-indigo-500 text-xl">৳</span>
                   <input 
@@ -1722,7 +1722,7 @@ function GlobalSettings() {
                 </div>
               </div>
               <div className="space-y-4 relative z-10">
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-2">মোট খরচ (৳)</label>
+                <label className="block text-xs font-black text-slate-500 uppercase ml-2">মোট খরচ (৳)</label>
                 <div className="relative">
                   <span className="absolute left-6 top-1/2 -translate-y-1/2 font-black text-rose-500 text-xl">৳</span>
                   <input 
@@ -1745,7 +1745,7 @@ function GlobalSettings() {
           whileHover={{ scale: 1.02, y: -5 }}
           whileTap={{ scale: 0.98 }}
           disabled={loading}
-          className="w-full bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 text-white py-8 rounded-[2.5rem] font-black uppercase tracking-[0.3em] text-sm shadow-[0_20px_40px_rgba(79,70,229,0.4)] flex items-center justify-center gap-6 disabled:opacity-50 relative overflow-hidden group/btn"
+          className="w-full bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 text-white py-8 rounded-[2.5rem] font-black uppercase text-sm shadow-[0_20px_40px_rgba(79,70,229,0.4)] flex items-center justify-center gap-6 disabled:opacity-50 relative overflow-hidden group/btn"
         >
           <div className="absolute inset-0 bg-white/10 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
           {loading ? 'সেভ হচ্ছে...' : <><Check size={24} className="group-hover:scale-125 transition-transform" /> সেটিংস সেভ করুন</>}

@@ -97,12 +97,12 @@ export default function Posts() {
         <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="space-y-4 text-center md:text-left">
             <div className="flex items-center gap-3 justify-center md:justify-start">
-              <span className="px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-indigo-400 font-black uppercase tracking-[0.3em] text-[10px] flex items-center gap-2">
+              <span className="px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-indigo-400 font-black uppercase text-xs flex items-center gap-2 transition-all">
                 <Activity size={12} /> লাইভ আপডেট
               </span>
             </div>
             <h1 className="text-5xl font-black text-gradient uppercase tracking-tighter leading-none">ফাউন্ডেশন পোস্ট</h1>
-            <p className="text-slate-500 font-black uppercase tracking-[0.4em] text-[10px] opacity-80">অ্যাডমিনদের গুরুত্বপূর্ণ আপডেট ও ঘোষণা</p>
+            <p className="text-slate-500 font-black uppercase text-xs opacity-80">অ্যাডমিনদের গুরুত্বপূর্ণ আপডেট ও ঘোষণা</p>
           </div>
           <motion.div 
             animate={{ rotate: 360 }}
@@ -162,7 +162,7 @@ export default function Posts() {
               whileHover={{ scale: 1.02, y: -5, boxShadow: "0 20px 40px rgba(79,70,229,0.3)" }}
               whileTap={{ scale: 0.98 }}
               disabled={isPosting}
-              className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 text-white py-6 rounded-[2.5rem] font-black uppercase tracking-[0.3em] text-sm shadow-2xl flex items-center justify-center gap-4 disabled:opacity-50 border border-white/10"
+              className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 text-white py-6 rounded-[2.5rem] font-black uppercase text-sm shadow-2xl flex items-center justify-center gap-4 disabled:opacity-50 border border-white/10"
             >
               {isPosting ? (
                 <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin" />
@@ -196,13 +196,13 @@ export default function Posts() {
                     <h2 className="text-2xl font-black text-white uppercase tracking-tight">
                       {post.authorName}
                     </h2>
-                    <span className="px-3 py-1 bg-indigo-500/10 text-indigo-400 rounded-full border border-indigo-500/20 font-black text-[8px] uppercase tracking-widest flex items-center gap-1">
+                    <span className="px-3 py-1 bg-indigo-500/10 text-indigo-400 rounded-full border border-indigo-500/20 font-black text-xs uppercase flex items-center gap-1 transition-all">
                       <Shield size={10} /> Admin
                     </span>
                   </div>
                   <div className="flex items-center gap-2 text-slate-500">
                     <Clock size={12} />
-                    <p className="text-[10px] font-black uppercase tracking-widest">
+                    <p className="text-xs font-black uppercase transition-all">
                       {format(new Date(post.createdAt), 'dd MMM yyyy, hh:mm a')}
                     </p>
                   </div>
@@ -239,7 +239,7 @@ export default function Posts() {
                   href={post.fbLink} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-4 text-indigo-400 text-[10px] font-black uppercase tracking-[0.3em] hover:text-indigo-300 transition-all mb-10 bg-indigo-500/5 px-6 py-3 rounded-full border border-indigo-500/10"
+                  className="inline-flex items-center gap-4 text-indigo-400 text-xs font-black uppercase hover:text-indigo-300 transition-all mb-10 bg-indigo-500/5 px-6 py-3 rounded-full border border-indigo-500/10"
                 >
                   <LinkIcon size={16} /> ফেসবুক পোস্ট দেখুন
                 </motion.a>
@@ -268,7 +268,7 @@ export default function Posts() {
                         )}
                       >
                         <span className="text-2xl drop-shadow-lg">{r.emoji}</span>
-                        {count > 0 && <span className="text-xs font-black text-white tracking-widest">{count}</span>}
+                        {count > 0 && <span className="text-xs font-black text-white transition-all">{count}</span>}
                       </motion.button>
                     );
                   })}
@@ -285,7 +285,7 @@ export default function Posts() {
                   )}
                 >
                   <MessageSquare size={24} />
-                  <span className="text-sm font-black tracking-[0.2em]">{post.comments?.length || 0}</span>
+                  <span className="text-sm font-black transition-all">{post.comments?.length || 0}</span>
                 </motion.button>
               </div>
 
@@ -313,16 +313,16 @@ export default function Posts() {
                                 <div className="w-8 h-8 bg-indigo-500/10 rounded-xl flex items-center justify-center text-indigo-400 font-black text-xs border border-indigo-500/20">
                                   {comment.userName[0]}
                                 </div>
-                                <p className="text-xs font-black text-white uppercase tracking-widest">{comment.userName}</p>
+                                <p className="text-xs font-black text-white uppercase transition-all">{comment.userName}</p>
                               </div>
-                              <p className="text-[9px] text-slate-600 font-black uppercase tracking-widest">{format(new Date(comment.createdAt), 'dd MMM, hh:mm a')}</p>
+                              <p className="text-xs text-slate-600 font-black uppercase transition-all">{format(new Date(comment.createdAt), 'dd MMM, hh:mm a')}</p>
                             </div>
                             <p className="text-sm text-slate-400 font-bold leading-relaxed pl-11">{comment.content}</p>
                           </motion.div>
                         ))}
                         {(!post.comments || post.comments.length === 0) && (
                           <div className="text-center py-16 border-2 border-dashed border-white/5 rounded-[2.5rem]">
-                            <p className="text-[10px] text-slate-600 font-black uppercase tracking-[0.5em]">কোন কমেন্ট নেই। প্রথম কমেন্ট করুন!</p>
+                            <p className="text-xs text-slate-600 font-black uppercase">কোন কমেন্ট নেই। প্রথম কমেন্ট করুন!</p>
                           </div>
                         )}
                       </div>
