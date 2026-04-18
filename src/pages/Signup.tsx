@@ -239,15 +239,15 @@ export default function Signup() {
           </button>
         </div>
 
-        <div className="p-8 md:p-14">
+        <div className="p-4 md:p-14">
           {/* Goals and Objectives */}
           <div 
-            className="mb-16 glass rounded-3xl p-8 md:p-12 border border-white/5 relative overflow-hidden"
+            className="mb-10 md:mb-16 glass rounded-3xl p-6 md:p-12 border border-white/5 relative overflow-hidden"
           >
-            <h2 className="text-2xl font-black text-white mb-10 flex items-center gap-4 uppercase">
-              <Flag className="text-indigo-400" size={32} /> লক্ষ্য ও উদ্দেশ্য
+            <h2 className="text-xl md:text-2xl font-black text-white mb-8 md:mb-10 flex items-center gap-4 uppercase">
+              <Flag className="text-indigo-400" size={28} className="md:w-8 md:h-8" /> লক্ষ্য ও উদ্দেশ্য
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {[
                 { icon: Users, text: "সামাজিক কর্মকান্ড পরিচালনা করা।" },
                 { icon: ShieldCheck, text: "মাদকের বিরুদ্ধে জনসচেতনতা সৃষ্টি করা।" },

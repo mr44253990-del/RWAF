@@ -175,13 +175,13 @@ export default function Dashboard() {
           <motion.h1 
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-3xl md:text-5xl font-black text-white uppercase relative leading-tight"
+            className="text-2xl md:text-5xl font-black text-white uppercase relative leading-tight"
           >
             স্বাগতম, <span className="text-gradient drop-shadow-[0_0_15px_rgba(99,102,241,0.3)]">{profile?.name}</span>!
           </motion.h1>
           <p className="text-slate-500 text-[10px] md:text-xs font-black uppercase mt-2 opacity-80 flex items-center gap-2">
             <span className="w-6 md:w-8 h-[1px] bg-indigo-500/50" />
-            রামনগর যুব-কল্যান ফাউন্ডেশন ড্যাশবোর্ড
+            রামনগর যুব-কল্যান ড্যাশবোর্ড
           </p>
         </div>
         <div className="relative ml-auto md:ml-0">

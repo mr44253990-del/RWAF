@@ -63,17 +63,17 @@ export default function Login() {
         transition={{ duration: 0.5 }}
         className="w-full max-w-xl glass overflow-hidden shadow-2xl border border-white/5 relative z-10 rounded-3xl"
       >
-        <div className="bg-gradient-to-br from-indigo-600 to-purple-700 p-12 text-white text-center relative overflow-hidden">
+        <div className="bg-gradient-to-br from-indigo-600 to-purple-700 p-8 md:p-12 text-white text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-white/5" />
           
-          <div className="w-24 h-24 bg-white/10 backdrop-blur-xl rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl border border-white/20">
-            <Shield size={48} className="text-white" />
+          <div className="w-20 h-20 md:w-24 md:h-24 bg-white/10 backdrop-blur-xl rounded-3xl flex items-center justify-center mx-auto mb-6 md:mb-8 shadow-xl border border-white/20">
+            <Shield size={40} className="md:w-12 md:h-12 text-white" />
           </div>
-          <h1 className="text-4xl font-black mb-2 uppercase">স্বাগতম</h1>
-          <p className="text-indigo-100 font-bold uppercase text-xs mt-2 opacity-80">রামনগর যুব-কল্যান ফাউন্ডেশন</p>
+          <h1 className="text-3xl md:text-4xl font-black mb-2 uppercase">স্বাগতম</h1>
+          <p className="text-indigo-100 font-bold uppercase text-[10px] md:text-xs mt-2 opacity-80">রামনগর যুব-কল্যান ফাউন্ডেশন</p>
         </div>
 
-        <div className="p-10">
+        <div className="p-6 md:p-10">
           {error && (
             <motion.div 
               initial={{ opacity: 0 }}
@@ -84,7 +84,7 @@ export default function Login() {
             </motion.div>
           )}
 
-          <form onSubmit={handleLogin} className="space-y-8">
+          <form onSubmit={handleLogin} className="space-y-6 md:space-y-8">
             <div className="space-y-3">
               <label className="block text-xs font-bold text-slate-500 uppercase ml-2">ইমেইল এড্রেস</label>
               <div className="relative group">

@@ -14,6 +14,7 @@ import {
   TrendingUp
 } from 'lucide-react';
 import { auth, db } from '../firebase';
+import { useAuth } from '../App';
 import { 
   collection, 
   addDoc, 
@@ -28,6 +29,7 @@ import { format } from 'date-fns';
 import { cn } from '../lib/utils';
 
 export default function FundManagement() {
+  const { showToast } = useAuth();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [amount, setAmount] = useState('');
   const [txId, setTxId] = useState('');
@@ -35,9 +37,14 @@ export default function FundManagement() {
   const [loading, setLoading] = useState(false);
   const [transactions, setTransactions] = useState<any[]>([]);
   const [profile, setProfile] = useState<any>(null);
+  const [settings, setSettings] = useState<any>(null);
 
   useEffect(() => {
     if (!auth.currentUser) return;
+
+    const unsubSettings = onSnapshot(doc(db, 'settings', 'main'), (docSnap) => {
+      if (docSnap.exists()) setSettings(docSnap.data());
+    });
 
     const q = query(
       collection(db, 'transactions'),
@@ -58,40 +65,48 @@ export default function FundManagement() {
     };
 
     fetchProfile();
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+      unsubSettings();
+    };
   }, []);
 
   const handleAddMoney = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!auth.currentUser) return;
+    if (!auth.currentUser || !profile) return;
 
     setLoading(true);
     try {
+      const methodName = method === 'bkash' ? 'বিকাশ' : method === 'nagad' ? 'নগদ' : 'রকেট';
       await addDoc(collection(db, 'transactions'), {
         userId: auth.currentUser.uid,
-        userName: auth.currentUser.displayName || 'Unknown User',
+        userName: profile.name || auth.currentUser.displayName || 'Unknown User',
         amount: Number(amount),
-        method,
-        txId,
+        type: 'income',
+        paymentMethod: method,
+        transactionId: txId,
         status: 'pending',
         date: new Date().toISOString(),
-        category: 'Contribution'
+        category: `জমা (${methodName})`
       });
       setIsAddModalOpen(false);
       setAmount('');
       setTxId('');
-    } catch (error) {
+      showToast('টাকা জমার অনুরোধ পাঠানো হয়েছে। অ্যাডমিন চেক করে অ্যাপ্রুভ করবেন।');
+    } catch (error: any) {
       console.error('Error adding money:', error);
+      showToast('অনুরোধ পাঠাতে ব্যর্থ হয়েছে: ' + error.message, 'error');
     } finally {
       setLoading(false);
     }
   };
 
   const getMethodNumber = () => {
+    if (!settings) return 'লোড হচ্ছে...';
     switch (method) {
-      case 'bkash': return '017XXXXXXXX';
-      case 'nagad': return '018XXXXXXXX';
-      case 'rocket': return '019XXXXXXXX';
+      case 'bkash': return settings.bkashNo || 'সেট করা নেই';
+      case 'nagad': return settings.nagadNo || 'সেট করা নেই';
+      case 'rocket': return settings.rocketNo || 'সেট করা নেই';
       default: return '';
     }
   };
