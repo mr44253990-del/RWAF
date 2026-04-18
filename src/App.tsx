@@ -31,8 +31,6 @@ interface AuthContextType {
   user: User | null;
   profile: UserProfile | null;
   loading: boolean;
-  darkMode: boolean;
-  setDarkMode: (val: boolean) => void;
   showToast: (message: string, type?: 'success' | 'error' | 'info') => void;
   showConfirm: (message: string, onConfirm: () => void) => void;
 }
@@ -41,8 +39,6 @@ const AuthContext = createContext<AuthContextType>({
   user: null, 
   profile: null, 
   loading: true,
-  darkMode: false,
-  setDarkMode: () => {},
   showToast: () => {},
   showConfirm: () => {}
 });
@@ -53,7 +49,7 @@ export default function App() {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
-  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
+  const [darkMode] = useState(true);
   const location = useLocation();
 
   const [toast, setToast] = useState<{ message: string, type: 'success' | 'error' | 'info' } | null>(null);
@@ -69,16 +65,10 @@ export default function App() {
   };
 
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      document.body.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.body.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [darkMode]);
+    document.documentElement.classList.add('dark');
+    document.body.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+  }, []);
 
   useEffect(() => {
     if ("Notification" in window && Notification.permission === "default") {
@@ -185,8 +175,8 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+      <div className="flex items-center justify-center h-screen bg-slate-950 transition-colors duration-300">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600"></div>
       </div>
     );
   }
@@ -199,8 +189,8 @@ export default function App() {
   }
 
   return (
-    <AuthContext.Provider value={{ user, profile, loading, darkMode, setDarkMode, showToast, showConfirm }}>
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
+    <AuthContext.Provider value={{ user, profile, loading, showToast, showConfirm }}>
+      <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-indigo-500/30">
         <AnimatePresence>
           {toast && (
             <motion.div
@@ -208,7 +198,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.9 }}
               className={cn(
-                "fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] px-8 py-4 rounded-2xl font-black uppercase text-xs shadow-2xl border backdrop-blur-xl flex items-center gap-4 transition-all",
+                "fixed bottom-24 md:bottom-10 left-1/2 -translate-x-1/2 z-[100] px-8 py-4 rounded-2xl font-black uppercase text-xs shadow-2xl border backdrop-blur-xl flex items-center gap-4 transition-all",
                 toast.type === 'success' ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" :
                 toast.type === 'error' ? "bg-rose-500/10 border-rose-500/20 text-rose-400" :
                 "bg-indigo-500/10 border-indigo-500/20 text-indigo-400"
@@ -236,7 +226,7 @@ export default function App() {
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
-                className="relative w-full max-w-md glass p-8 border border-white/10 shadow-2xl text-center rounded-3xl"
+                className="relative w-full max-w-md glass p-6 md:p-8 border border-white/10 shadow-2xl text-center rounded-3xl"
               >
                 <div className="w-16 h-16 bg-amber-500/10 text-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-amber-500/20">
                   <Bell size={32} />
@@ -246,7 +236,7 @@ export default function App() {
                 <div className="flex gap-4">
                   <button 
                     onClick={() => setConfirm(null)}
-                    className="flex-1 px-6 py-4 rounded-xl border border-white/10 text-slate-500 font-bold uppercase text-xs hover:bg-white/5 transition-all text-white"
+                    className="flex-1 px-6 py-4 rounded-xl border border-white/10 text-slate-300 font-bold uppercase text-xs hover:bg-white/5 transition-all"
                   >
                     বাতিল
                   </button>
@@ -264,8 +254,8 @@ export default function App() {
             </div>
           )}
         </AnimatePresence>
-        {user && profile?.isProfileComplete && <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />}
-        <main className={user && profile?.isProfileComplete ? "pt-24 pb-24 px-4 max-w-7xl mx-auto" : ""}>
+        {user && profile?.isProfileComplete && <Navbar />}
+        <main className={user && profile?.isProfileComplete ? "pt-6 md:pt-32 pb-32 px-4 max-w-7xl mx-auto" : ""}>
           <Routes>
             <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
             <Route path="/signup" element={(!user || !profile?.isProfileComplete) ? <Signup /> : <Navigate to="/" />} />

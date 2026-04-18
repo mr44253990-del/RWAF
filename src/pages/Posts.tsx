@@ -89,27 +89,27 @@ export default function Posts() {
       <motion.header 
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
-        className="glass-card p-12 relative overflow-hidden group shadow-[0_40px_80px_rgba(0,0,0,0.4)] border border-white/10"
+        className="glass-card p-8 md:p-12 relative overflow-hidden group shadow-[0_40px_80px_rgba(0,0,0,0.4)] border border-white/10"
       >
         <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-600/10 blur-[120px] -mr-48 -mt-48 transition-all group-hover:bg-indigo-600/20" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-600/10 blur-[100px] -ml-32 -mb-32" />
         
-        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="space-y-4 text-center md:text-left">
+        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8 text-center md:text-left">
+          <div className="space-y-3 md:space-y-4">
             <div className="flex items-center gap-3 justify-center md:justify-start">
-              <span className="px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-indigo-400 font-black uppercase text-xs flex items-center gap-2 transition-all">
-                <Activity size={12} /> লাইভ আপডেট
+              <span className="px-3 py-1 md:px-4 md:py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-indigo-400 font-black uppercase text-[10px] md:text-xs flex items-center gap-2 transition-all">
+                <Activity size={10} className="md:w-3 md:h-3" /> লাইভ আপডেট
               </span>
             </div>
-            <h1 className="text-5xl font-black text-gradient uppercase tracking-tighter leading-none">ফাউন্ডেশন পোস্ট</h1>
-            <p className="text-slate-500 font-black uppercase text-xs opacity-80">অ্যাডমিনদের গুরুত্বপূর্ণ আপডেট ও ঘোষণা</p>
+            <h1 className="text-3xl md:text-5xl font-black text-gradient uppercase tracking-tighter leading-none">ফাউন্ডেশন পোস্ট</h1>
+            <p className="text-slate-500 font-black uppercase text-[10px] md:text-xs opacity-80">অ্যাডমিনদের গুরুত্বপূর্ণ আপডেট ও ঘোষণা</p>
           </div>
           <motion.div 
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="w-24 h-24 glass border border-white/20 rounded-[2rem] flex items-center justify-center text-indigo-400 shadow-2xl shadow-indigo-500/20"
+            className="w-16 h-16 md:w-24 md:h-24 glass border border-white/20 rounded-2xl md:rounded-[2rem] flex items-center justify-center text-indigo-400 shadow-2xl shadow-indigo-500/20"
           >
-            <Sparkles size={40} />
+            <Sparkles size={28} className="md:w-10 md:h-10" />
           </motion.div>
         </div>
       </motion.header>
@@ -119,40 +119,40 @@ export default function Posts() {
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="glass-card p-12 border border-white/10 shadow-2xl relative overflow-hidden"
+          className="glass-card p-6 md:p-12 border border-white/10 shadow-2xl relative overflow-hidden"
         >
           <div className="absolute top-0 left-0 w-64 h-64 bg-indigo-500/5 blur-[100px] -ml-32 -mt-32" />
-          <div className="flex items-center gap-4 mb-10">
-            <div className="w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center text-white font-black text-xl shadow-lg">
+          <div className="flex items-center gap-4 mb-6 md:mb-10 text-center md:text-left">
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white font-black text-lg md:text-xl shadow-lg">
               {profile.name[0]}
             </div>
-            <h3 className="text-xl font-black text-white uppercase tracking-tight">নতুন পোস্ট তৈরি করুন</h3>
+            <h3 className="text-lg md:text-xl font-black text-white uppercase tracking-tight">নতুন পোস্ট তৈরি করুন</h3>
           </div>
-          <form onSubmit={handleCreatePost} className="space-y-8 relative z-10">
+          <form onSubmit={handleCreatePost} className="space-y-6 md:space-y-8 relative z-10">
             <textarea
               required
               placeholder="নতুন কিছু লিখুন..."
-              className="w-full px-8 py-6 glass border border-white/10 rounded-[2rem] outline-none focus:ring-2 focus:ring-indigo-500 h-48 resize-none text-white font-black placeholder:text-slate-800 transition-all text-lg"
+              className="w-full px-6 py-4 md:px-8 md:py-6 glass border border-white/10 rounded-2xl md:rounded-[2rem] outline-none focus:ring-2 focus:ring-indigo-500 h-32 md:h-48 resize-none text-white font-black placeholder:text-slate-800 transition-all text-base md:text-lg"
               value={newPost}
               onChange={(e) => setNewPost(e.target.value)}
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
               <div className="relative group">
-                <LinkIcon size={20} className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-indigo-400 transition-colors" />
+                <LinkIcon size={16} className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-indigo-400 transition-colors" />
                 <input 
                   type="url" 
                   placeholder="ফেসবুক লিংক (ঐচ্ছিক)"
-                  className="w-full pl-16 pr-8 py-5 glass border border-white/10 rounded-[2rem] text-sm outline-none focus:ring-2 focus:ring-indigo-500 text-white font-black placeholder:text-slate-800 transition-all"
+                  className="w-full pl-12 pr-6 md:pl-16 md:pr-8 py-4 md:py-5 glass border border-white/10 rounded-xl md:rounded-[2rem] text-xs md:text-sm outline-none focus:ring-2 focus:ring-indigo-500 text-white font-black placeholder:text-slate-800 transition-all"
                   value={fbLink}
                   onChange={(e) => setFbLink(e.target.value)}
                 />
               </div>
               <div className="relative group">
-                <ImageIcon size={20} className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-indigo-400 transition-colors" />
+                <ImageIcon size={16} className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-indigo-400 transition-colors" />
                 <input 
                   type="url" 
                   placeholder="থাম্বনেইল ইমেজ লিংক"
-                  className="w-full pl-16 pr-8 py-5 glass border border-white/10 rounded-[2rem] text-sm outline-none focus:ring-2 focus:ring-indigo-500 text-white font-black placeholder:text-slate-800 transition-all"
+                  className="w-full pl-12 pr-6 md:pl-16 md:pr-8 py-4 md:py-5 glass border border-white/10 rounded-xl md:rounded-[2rem] text-xs md:text-sm outline-none focus:ring-2 focus:ring-indigo-500 text-white font-black placeholder:text-slate-800 transition-all"
                   value={thumbnail}
                   onChange={(e) => setThumbnail(e.target.value)}
                 />
@@ -162,11 +162,11 @@ export default function Posts() {
               whileHover={{ scale: 1.02, y: -5, boxShadow: "0 20px 40px rgba(79,70,229,0.3)" }}
               whileTap={{ scale: 0.98 }}
               disabled={isPosting}
-              className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 text-white py-6 rounded-[2.5rem] font-black uppercase text-sm shadow-2xl flex items-center justify-center gap-4 disabled:opacity-50 border border-white/10"
+              className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 text-white py-4 md:py-6 rounded-2xl md:rounded-[2.5rem] font-black uppercase text-xs md:text-sm shadow-2xl flex items-center justify-center gap-3 md:gap-4 disabled:opacity-50 border border-white/10"
             >
               {isPosting ? (
-                <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin" />
-              ) : <><Send size={24} /> পোস্ট পাবলিশ করুন</>}
+                <div className="w-5 h-5 md:w-6 md:h-6 border-4 border-white/30 border-t-white rounded-full animate-spin" />
+              ) : <><Send size={20} className="md:w-6 md:h-6" /> পোস্ট পাবলিশ করুন</>}
             </motion.button>
           </form>
         </motion.div>
@@ -183,26 +183,26 @@ export default function Posts() {
             key={post.id} 
             className="glass-card relative overflow-hidden group border border-white/10 preserve-3d shadow-[0_30px_60px_rgba(0,0,0,0.3)]"
           >
-            <div className="p-10 flex items-center justify-between relative z-10">
-              <div className="flex items-center gap-6">
+            <div className="p-6 md:p-10 flex items-center justify-between relative z-10">
+              <div className="flex items-center gap-4 md:gap-6">
                 <motion.div 
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-16 h-16 bg-gradient-to-br from-indigo-600/20 to-purple-600/20 rounded-[1.5rem] flex items-center justify-center text-indigo-400 font-black text-2xl border border-indigo-500/20 shadow-xl"
+                  className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-indigo-600/20 to-purple-600/20 rounded-xl md:rounded-[1.5rem] flex items-center justify-center text-indigo-400 font-black text-xl md:text-2xl border border-indigo-500/20 shadow-xl"
                 >
                   {post.authorName[0]}
                 </motion.div>
-                <div className="space-y-1">
-                  <div className="flex items-center gap-3">
-                    <h2 className="text-2xl font-black text-white uppercase tracking-tight">
+                <div className="space-y-0.5 md:space-y-1">
+                  <div className="flex items-center gap-2 md:gap-3">
+                    <h2 className="text-lg md:text-2xl font-black text-white uppercase tracking-tight">
                       {post.authorName}
                     </h2>
-                    <span className="px-3 py-1 bg-indigo-500/10 text-indigo-400 rounded-full border border-indigo-500/20 font-black text-xs uppercase flex items-center gap-1 transition-all">
-                      <Shield size={10} /> Admin
+                    <span className="px-2 py-0.5 md:px-3 md:py-1 bg-indigo-500/10 text-indigo-400 rounded-full border border-indigo-500/20 font-black text-[10px] uppercase flex items-center gap-1 transition-all">
+                      <Shield size={8} className="md:w-2.5 md:h-2.5" /> Admin
                     </span>
                   </div>
-                  <div className="flex items-center gap-2 text-slate-500">
-                    <Clock size={12} />
-                    <p className="text-xs font-black uppercase transition-all">
+                  <div className="flex items-center gap-1.5 md:gap-2 text-slate-500">
+                    <Clock size={10} className="md:w-3 md:h-3" />
+                    <p className="text-[10px] md:text-xs font-black uppercase transition-all">
                       {format(new Date(post.createdAt), 'dd MMM yyyy, hh:mm a')}
                     </p>
                   </div>
@@ -211,17 +211,17 @@ export default function Posts() {
               <motion.div 
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 3, repeat: Infinity }}
-                className="w-3 h-3 bg-emerald-500 rounded-full shadow-[0_0_15px_rgba(16,185,129,0.5)]" 
+                className="w-2 h-2 md:w-3 md:h-3 bg-emerald-500 rounded-full shadow-[0_0_15px_rgba(16,185,129,0.5)]" 
               />
             </div>
 
-            <div className="px-10 pb-10 relative z-10">
-              <p className="text-slate-300 font-bold leading-relaxed whitespace-pre-wrap mb-10 text-xl tracking-tight">{post.content}</p>
+            <div className="px-6 md:px-10 pb-6 md:pb-10 relative z-10">
+              <p className="text-slate-300 font-bold leading-relaxed whitespace-pre-wrap mb-6 md:mb-10 text-base md:text-xl tracking-tight">{post.content}</p>
               
               {post.thumbnail && (
                 <motion.div 
                   whileHover={{ scale: 1.02, y: -5 }}
-                  className="rounded-[2.5rem] overflow-hidden mb-10 border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.5)] relative group/img"
+                  className="rounded-2xl md:rounded-[2.5rem] overflow-hidden mb-6 md:mb-10 border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.5)] relative group/img"
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-500" />
                   <img 
@@ -239,14 +239,14 @@ export default function Posts() {
                   href={post.fbLink} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-4 text-indigo-400 text-xs font-black uppercase hover:text-indigo-300 transition-all mb-10 bg-indigo-500/5 px-6 py-3 rounded-full border border-indigo-500/10"
+                  className="inline-flex items-center gap-3 md:gap-4 text-indigo-400 text-[10px] md:text-xs font-black uppercase hover:text-indigo-300 transition-all mb-6 md:mb-10 bg-indigo-500/5 px-4 py-2 md:px-6 md:py-3 rounded-full border border-indigo-500/10"
                 >
-                  <LinkIcon size={16} /> ফেসবুক পোস্ট দেখুন
+                  <LinkIcon size={14} className="md:w-4 md:h-4" /> ফেসবুক পোস্ট দেখুন
                 </motion.a>
               )}
 
-              <div className="flex items-center justify-between pt-10 border-t border-white/5">
-                <div className="flex items-center gap-4">
+              <div className="flex items-center justify-between pt-6 md:pt-10 border-t border-white/5">
+                <div className="flex items-center gap-2 md:gap-4">
                   {[
                     { emoji: '👍', icon: ThumbsUp, color: 'text-blue-400', label: 'Like' },
                     { emoji: '❤️', icon: Heart, color: 'text-rose-400', label: 'Love' },
@@ -261,14 +261,14 @@ export default function Posts() {
                         whileTap={{ scale: 0.9 }}
                         onClick={() => handleReact(post.id, r.emoji)}
                         className={cn(
-                          "flex items-center gap-3 px-5 py-3 rounded-[1.5rem] transition-all border shadow-xl",
+                          "flex items-center gap-2 md:gap-3 px-3 py-2 md:px-5 md:py-3 rounded-[1rem] md:rounded-[1.5rem] transition-all border shadow-xl",
                           isActive 
                             ? "bg-white/10 border-white/20 shadow-indigo-500/10" 
                             : "bg-white/5 border-transparent hover:border-white/10"
                         )}
                       >
-                        <span className="text-2xl drop-shadow-lg">{r.emoji}</span>
-                        {count > 0 && <span className="text-xs font-black text-white transition-all">{count}</span>}
+                        <span className="text-lg md:text-2xl drop-shadow-lg">{r.emoji}</span>
+                        {count > 0 && <span className="text-[10px] md:text-xs font-black text-white transition-all">{count}</span>}
                       </motion.button>
                     );
                   })}
@@ -278,14 +278,14 @@ export default function Posts() {
                   whileTap={{ scale: 0.9 }}
                   onClick={() => setShowComments({ ...showComments, [post.id]: !showComments[post.id] })}
                   className={cn(
-                    "flex items-center gap-4 transition-all px-6 py-3 rounded-[1.5rem] border shadow-xl",
+                    "flex items-center gap-2 md:gap-4 transition-all px-4 py-2 md:px-6 md:py-3 rounded-[1rem] md:rounded-[1.5rem] border shadow-xl",
                     showComments[post.id] 
                       ? "bg-indigo-500/10 text-indigo-400 border-indigo-500/20 shadow-indigo-500/10" 
                       : "text-slate-500 border-transparent hover:bg-white/5 hover:border-white/10"
                   )}
                 >
-                  <MessageSquare size={24} />
-                  <span className="text-sm font-black transition-all">{post.comments?.length || 0}</span>
+                  <MessageSquare size={20} className="md:w-6 md:h-6" />
+                  <span className="text-xs md:text-sm font-black transition-all">{post.comments?.length || 0}</span>
                 </motion.button>
               </div>
 
@@ -298,56 +298,53 @@ export default function Posts() {
                     exit={{ opacity: 0, height: 0 }}
                     className="overflow-hidden"
                   >
-                    <div className="mt-10 pt-10 border-t border-white/5 space-y-10">
-                      <div className="space-y-6 max-h-[400px] overflow-y-auto no-scrollbar pr-4">
+                    <div className="mt-6 md:mt-10 pt-6 md:pt-10 border-t border-white/5 space-y-6 md:space-y-10">
+                      <div className="space-y-4 md:space-y-6 max-h-[400px] overflow-y-auto no-scrollbar pr-2 md:pr-4">
                         {post.comments?.map((comment, cIdx) => (
                           <motion.div 
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: cIdx * 0.05 }}
                             key={comment.id} 
-                            className="bg-white/5 p-8 rounded-[2rem] border border-white/5 group hover:border-white/10 transition-all shadow-lg"
+                            className="bg-white/5 p-5 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 group hover:border-white/10 transition-all shadow-lg"
                           >
-                            <div className="flex justify-between items-center mb-4">
-                              <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 bg-indigo-500/10 rounded-xl flex items-center justify-center text-indigo-400 font-black text-xs border border-indigo-500/20">
+                            <div className="flex justify-between items-center mb-2 md:mb-4">
+                              <div className="flex items-center gap-2 md:gap-3">
+                                <div className="w-6 h-6 md:w-8 md:h-8 bg-indigo-500/10 rounded-lg md:rounded-xl flex items-center justify-center text-indigo-400 font-black text-[10px] border border-indigo-500/20">
                                   {comment.userName[0]}
                                 </div>
-                                <p className="text-xs font-black text-white uppercase transition-all">{comment.userName}</p>
+                                <p className="text-[10px] md:text-xs font-black text-white uppercase transition-all">{comment.userName}</p>
                               </div>
-                              <p className="text-xs text-slate-600 font-black uppercase transition-all">{format(new Date(comment.createdAt), 'dd MMM, hh:mm a')}</p>
+                              <p className="text-[10px] md:text-xs text-slate-600 font-black uppercase transition-all">{format(new Date(comment.createdAt), 'dd MMM, hh:mm a')}</p>
                             </div>
-                            <p className="text-sm text-slate-400 font-bold leading-relaxed pl-11">{comment.content}</p>
+                            <p className="text-xs md:text-sm text-slate-400 font-bold leading-relaxed pl-8 md:pl-11">{comment.content}</p>
                           </motion.div>
                         ))}
                         {(!post.comments || post.comments.length === 0) && (
-                          <div className="text-center py-16 border-2 border-dashed border-white/5 rounded-[2.5rem]">
-                            <p className="text-xs text-slate-600 font-black uppercase">কোন কমেন্ট নেই। প্রথম কমেন্ট করুন!</p>
+                          <div className="text-center py-10 md:py-16 border-2 border-dashed border-white/5 rounded-2xl md:rounded-[2.5rem]">
+                            <p className="text-[10px] md:text-xs text-slate-600 font-black uppercase">কোন কমেন্ট নেই। প্রথম কমেন্ট করুন!</p>
                           </div>
                         )}
                       </div>
 
-                      <div className="flex gap-4 items-center">
+                      <div className="flex gap-3 md:gap-4 items-center">
                         <div className="flex-1 relative group">
                           <input 
                             type="text" 
                             placeholder="আপনার মতামত লিখুন..."
-                            className="w-full px-8 py-5 glass border border-white/10 rounded-[2rem] text-sm outline-none focus:ring-2 focus:ring-indigo-500 text-white font-black placeholder:text-slate-800 transition-all shadow-inner"
+                            className="w-full px-6 md:px-8 py-4 md:py-5 glass border border-white/10 rounded-xl md:rounded-[2rem] text-xs md:text-sm outline-none focus:ring-2 focus:ring-indigo-500 text-white font-black placeholder:text-slate-800 transition-all shadow-inner"
                             value={commentText[post.id] || ''}
                             onChange={(e) => setCommentText({ ...commentText, [post.id]: e.target.value })}
                             onKeyPress={(e) => e.key === 'Enter' && handleAddComment(post.id)}
                           />
-                          <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2 opacity-0 group-focus-within:opacity-100 transition-opacity">
-                            <Zap size={14} className="text-indigo-400 animate-pulse" />
-                          </div>
                         </div>
                         <motion.button 
                           whileHover={{ scale: 1.1, rotate: 10, boxShadow: "0 15px 30px rgba(79,70,229,0.3)" }}
                           whileTap={{ scale: 0.9 }}
                           onClick={() => handleAddComment(post.id)}
-                          className="p-5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-[1.5rem] shadow-2xl border border-white/10"
+                          className="p-4 md:p-5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl md:rounded-[1.5rem] shadow-2xl border border-white/10"
                         >
-                          <Send size={24} />
+                          <Send size={20} className="md:w-6 md:h-6" />
                         </motion.button>
                       </div>
                     </div>

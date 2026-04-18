@@ -93,25 +93,25 @@ export default function Profile() {
           </div>
         </div>
 
-        <div className="px-12 pb-12 relative">
-          <div className="relative -mt-32 mb-10 flex flex-col md:flex-row justify-between items-end gap-8">
-            <div className="flex flex-col md:flex-row items-end gap-8">
+        <div className="px-6 md:px-12 pb-10 md:pb-12 relative">
+          <div className="relative -mt-24 md:-mt-32 mb-8 md:mb-10 flex flex-col md:flex-row justify-between items-center md:items-end gap-6 md:gap-8">
+            <div className="flex flex-col md:flex-row items-center md:items-end gap-6 md:gap-8">
               <motion.div 
                 whileHover={{ scale: 1.05, rotate: 2, z: 50 }}
-                className="w-48 h-48 glass p-3 rounded-[3rem] shadow-[0_30px_60px_rgba(0,0,0,0.5)] border border-white/30 relative z-20 preserve-3d"
+                className="w-32 h-32 md:w-48 md:h-48 glass p-2 md:p-3 rounded-2xl md:rounded-[3rem] shadow-[0_30px_60px_rgba(0,0,0,0.5)] border border-white/30 relative z-20 preserve-3d"
               >
-                <div className="w-full h-full bg-gradient-to-br from-indigo-600 via-purple-600 to-rose-600 rounded-[2.5rem] flex items-center justify-center text-6xl font-black text-white shadow-inner relative overflow-hidden">
+                <div className="w-full h-full bg-gradient-to-br from-indigo-600 via-purple-600 to-rose-600 rounded-xl md:rounded-[2.5rem] flex items-center justify-center text-4xl md:text-6xl font-black text-white shadow-inner relative overflow-hidden">
                   <div className="absolute inset-0 bg-white/10 blur-2xl opacity-50"></div>
                   <span className="relative z-10 drop-shadow-2xl">{profile.name[0]}</span>
                 </div>
-                <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-emerald-500 rounded-2xl flex items-center justify-center border-4 border-slate-950 shadow-xl">
-                  <Zap size={20} className="text-white fill-white" />
+                <div className="absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 w-8 h-8 md:w-12 md:h-12 bg-emerald-500 rounded-lg md:rounded-2xl flex items-center justify-center border-2 md:border-4 border-slate-950 shadow-xl">
+                  <Zap size={14} className="md:w-5 md:h-5 text-white fill-white" />
                 </div>
               </motion.div>
 
-              <div className="space-y-2 pb-4">
-                <div className="flex items-center gap-4">
-                  <h1 className="text-5xl font-black text-white uppercase tracking-tighter leading-none">
+              <div className="space-y-2 pb-0 md:pb-4 text-center md:text-left">
+                <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+                  <h1 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none">
                     {profile.name}
                   </h1>
                   {profile.role === 'admin' && (
@@ -175,14 +175,14 @@ export default function Profile() {
         <motion.div 
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
-          className="md:col-span-2 glass-card p-12 border border-white/10 flex flex-col md:flex-row justify-between items-center gap-10 relative overflow-hidden group shadow-2xl"
+          className="md:col-span-2 glass-card p-8 md:p-12 border border-white/10 flex flex-col md:flex-row justify-between items-center gap-8 md:gap-10 relative overflow-hidden group shadow-2xl"
         >
           <div className="absolute top-0 left-0 w-96 h-96 bg-emerald-500/10 blur-[120px] -ml-48 -mt-48 pointer-events-none"></div>
-          <div className="relative z-10 space-y-4">
-            <p className="text-slate-500 text-xs font-black uppercase mb-2">আপনার মোট কন্ট্রিবিউশন</p>
-            <div className="flex items-baseline gap-4">
-              <span className="text-7xl font-black text-gradient drop-shadow-2xl">৳{profile.totalContribution}</span>
-              <span className="text-emerald-500 font-black text-sm uppercase">+১২% এই মাসে</span>
+          <div className="relative z-10 space-y-3 md:space-y-4 text-center md:text-left">
+            <p className="text-slate-500 text-[10px] md:text-xs font-black uppercase mb-1 md:mb-2">আপনার মোট কন্ট্রিবিউশন</p>
+            <div className="flex flex-col md:flex-row items-center md:items-baseline gap-2 md:gap-4">
+              <span className="text-5xl md:text-7xl font-black text-gradient drop-shadow-2xl">৳{profile.totalContribution}</span>
+              <span className="text-emerald-500 font-black text-[10px] md:text-sm uppercase">+১২% এই মাসে</span>
             </div>
           </div>
           <motion.button 
@@ -190,27 +190,27 @@ export default function Profile() {
             whileTap={{ scale: 0.95 }}
             onClick={handleUpdateVisibility}
             className={cn(
-              "relative z-10 flex items-center gap-4 px-10 py-5 rounded-[2rem] text-xs font-black uppercase transition-all border shadow-2xl",
+              "relative z-10 flex items-center gap-3 md:gap-4 px-8 py-4 md:px-10 md:py-5 rounded-2xl md:rounded-[2rem] text-[10px] md:text-xs font-black uppercase transition-all border shadow-2xl",
               profile.contributionVisibility 
                 ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20 shadow-emerald-500/10" 
                 : "bg-white/5 text-slate-500 border-white/10"
             )}
           >
-            {profile.contributionVisibility ? <><Eye size={20} /> পাবলিকলি দৃশ্যমান</> : <><EyeOff size={20} /> ব্যক্তিগত</>}
+            {profile.contributionVisibility ? <><Eye size={16} className="md:w-5 md:h-5" /> পাবলিকলি দৃশ্যমান</> : <><EyeOff size={16} className="md:w-5 md:h-5" /> ব্যক্তিগত</>}
           </motion.button>
         </motion.div>
 
         <motion.div 
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
-          className="glass-card p-12 border border-white/10 flex flex-col justify-center items-center text-center relative overflow-hidden shadow-2xl"
+          className="glass-card p-8 md:p-12 border border-white/10 flex flex-col justify-center items-center text-center relative overflow-hidden shadow-2xl"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 blur-[100px] -mr-32 -mt-32 pointer-events-none"></div>
-          <div className="w-20 h-20 bg-indigo-500/10 rounded-3xl flex items-center justify-center text-indigo-400 mb-6 border border-indigo-500/20">
-            <Zap size={32} />
+          <div className="w-16 h-16 md:w-20 md:h-20 bg-indigo-500/10 rounded-2xl md:rounded-3xl flex items-center justify-center text-indigo-400 mb-4 md:mb-6 border border-indigo-500/20">
+            <Zap size={24} className="md:w-8 md:h-8" />
           </div>
-          <h3 className="text-3xl font-black text-white mb-2">লেভেল ৫</h3>
-          <p className="text-slate-500 text-xs font-black uppercase transition-all">ফাউন্ডেশন মেম্বারশিপ</p>
+          <h3 className="text-2xl md:text-3xl font-black text-white mb-1 md:mb-2">লেভেল ৫</h3>
+          <p className="text-slate-500 text-[10px] md:text-xs font-black uppercase transition-all">ফাউন্ডেশন মেম্বারশিপ</p>
         </motion.div>
       </div>
 
@@ -221,12 +221,12 @@ export default function Profile() {
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.95 }}
-            className="glass-card p-16 border border-white/10 shadow-[0_50px_100px_rgba(0,0,0,0.5)] relative z-30"
+            className="glass-card p-8 md:p-16 border border-white/10 shadow-[0_50px_100px_rgba(0,0,0,0.5)] relative z-30"
           >
-            <div className="flex justify-between items-center mb-12">
-              <h3 className="text-3xl font-black text-white uppercase tracking-tighter">প্রোফাইল পরিবর্তনের অনুরোধ</h3>
+            <div className="flex justify-between items-center mb-8 md:mb-12">
+              <h3 className="text-xl md:text-3xl font-black text-white uppercase tracking-tighter">প্রোফাইল পরিবর্তনের অনুরোধ</h3>
               <button onClick={() => setIsEditing(false)} className="text-slate-500 hover:text-white transition-colors">
-                <Zap size={24} className="rotate-45" />
+                <Zap size={20} className="md:w-6 md:h-6 rotate-45" />
               </button>
             </div>
             
@@ -280,20 +280,20 @@ export default function Profile() {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="glass-card p-16 border border-white/10 relative overflow-hidden group shadow-2xl"
+        className="glass-card p-8 md:p-16 border border-white/10 relative overflow-hidden group shadow-2xl"
       >
         <div className="absolute top-0 right-0 w-96 h-96 bg-rose-500/10 blur-[120px] -mr-48 -mt-48 pointer-events-none"></div>
-        <div className="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
-          <div className="space-y-2">
-            <h3 className="text-4xl font-black text-white uppercase tracking-tighter">অ্যাডমিন সাপোর্ট</h3>
-            <p className="text-slate-500 text-sm font-black uppercase">যেকোনো প্রয়োজনে আমাদের সাথে যোগাযোগ করুন</p>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-10 mb-10 md:mb-16">
+          <div className="space-y-2 text-center md:text-left">
+            <h3 className="text-2xl md:text-4xl font-black text-white uppercase tracking-tighter">অ্যাডমিন সাপোর্ট</h3>
+            <p className="text-slate-500 text-[10px] md:text-sm font-black uppercase">যেকোনো প্রয়োজনে আমাদের সাথে যোগাযোগ করুন</p>
           </div>
-          <div className="w-20 h-20 bg-rose-500/10 rounded-[2rem] flex items-center justify-center text-rose-400 border border-rose-500/20">
-            <Phone size={32} />
+          <div className="w-16 h-16 md:w-20 md:h-20 bg-rose-500/10 rounded-2xl md:rounded-[2rem] flex items-center justify-center text-rose-400 border border-rose-500/20">
+            <Phone size={24} className="md:w-8 md:h-8" />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 relative z-10">
           {[
             { icon: Mail, label: 'ইমেইল সাপোর্ট', value: 'mr4425390@gmail.com', link: 'mailto:mr4425390@gmail.com', color: 'text-indigo-400' },
             { icon: Phone, label: 'সরাসরি কল', value: '01941429881', link: 'tel:01941429881', color: 'text-emerald-400' },
@@ -305,13 +305,13 @@ export default function Profile() {
               target="_blank"
               rel="noreferrer"
               whileHover={{ y: -10, scale: 1.02 }}
-              className="p-8 glass border border-white/5 rounded-[2.5rem] group/item hover:border-white/20 transition-all shadow-xl hover:bg-white/5"
+              className="p-6 md:p-8 glass border border-white/5 rounded-2xl md:rounded-[2.5rem] group/item hover:border-white/20 transition-all shadow-xl hover:bg-white/5"
             >
-              <div className={cn("p-5 bg-white/5 rounded-2xl mb-6 w-fit group-hover/item:scale-110 transition-transform shadow-inner", item.color)}>
-                <item.icon size={28} />
+              <div className={cn("p-4 md:p-5 bg-white/5 rounded-xl md:rounded-2xl mb-4 md:mb-6 w-fit group-hover/item:scale-110 transition-transform shadow-inner", item.color)}>
+                <item.icon size={24} className="md:w-7 md:h-7" />
               </div>
-              <p className="text-xs font-black text-slate-500 uppercase mb-2 transition-all">{item.label}</p>
-              <p className="text-sm text-white font-black truncate">{item.value}</p>
+              <p className="text-[10px] md:text-xs font-black text-slate-500 uppercase mb-2 transition-all">{item.label}</p>
+              <p className="text-xs md:text-sm text-white font-black truncate">{item.value}</p>
             </motion.a>
           ))}
         </div>

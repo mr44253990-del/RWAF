@@ -34,9 +34,9 @@ export default function Voting() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-10 perspective-1000">
-      <header>
-        <h1 className="text-4xl font-black text-white tracking-tight uppercase">ভোট ও মতামত</h1>
-        <p className="text-slate-500 text-xs font-black uppercase mt-3 opacity-80">ফাউন্ডেশনের বিভিন্ন সিদ্ধান্তে আপনার মতামত দিন</p>
+      <header className="px-4 md:px-0">
+        <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight uppercase">ভোট ও মতামত</h1>
+        <p className="text-slate-500 text-[10px] md:text-xs font-black uppercase mt-2 md:mt-3 opacity-80">ফাউন্ডেশনের বিভিন্ন সিদ্ধান্তে আপনার মতামত দিন</p>
       </header>
 
       <div className="space-y-8">
@@ -60,18 +60,18 @@ export default function Voting() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: pIdx * 0.1 }}
                 key={poll.id} 
-                className="glass-card p-10 border border-white/5 relative overflow-hidden group preserve-3d"
+                className="glass-card p-6 md:p-10 border border-white/5 relative overflow-hidden group preserve-3d"
               >
                 <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/5 blur-[80px] -mr-32 -mt-32 transition-all group-hover:bg-indigo-600/10" />
                 
-                <div className="flex items-start gap-6 mb-10 relative z-10">
-                  <div className="p-4 bg-indigo-500/10 text-indigo-400 rounded-2xl border border-indigo-500/20 shadow-lg">
-                    <VoteIcon size={32} />
+                <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6 mb-8 md:mb-10 relative z-10 text-center md:text-left">
+                  <div className="p-3 md:p-4 bg-indigo-500/10 text-indigo-400 rounded-xl md:rounded-2xl border border-indigo-500/20 shadow-lg">
+                    <VoteIcon size={24} className="md:w-8 md:h-8" />
                   </div>
-                  <div>
-                    <h3 className="font-black text-white text-2xl uppercase tracking-tight leading-tight group-hover:text-indigo-400 transition-colors">{poll.question}</h3>
-                    <div className="flex items-center gap-4 mt-3 text-xs text-slate-500 font-black uppercase transition-all">
-                      <span className="flex items-center gap-2 bg-white/5 px-3 py-1 rounded-full"><Users size={14} className="text-indigo-400" /> {totalVotes} জন ভোট দিয়েছেন</span>
+                  <div className="flex-1">
+                    <h3 className="font-black text-white text-lg md:text-2xl uppercase tracking-tight leading-tight group-hover:text-indigo-400 transition-colors">{poll.question}</h3>
+                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 md:gap-4 mt-3 text-[10px] md:text-xs text-slate-500 font-black uppercase transition-all">
+                      <span className="flex items-center gap-2 bg-white/5 px-2 py-0.5 md:px-3 md:py-1 rounded-full"><Users size={12} className="md:w-3.5 md:h-3.5 text-indigo-400" /> {totalVotes} জন ভোট</span>
                       {hasVoted && <span className="text-emerald-400 flex items-center gap-2 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20"><CheckCircle2 size={14} /> আপনি ভোট দিয়েছেন</span>}
                     </div>
                   </div>
